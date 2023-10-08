@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1085320474742",
+    "project_id": "prod-stylist-savvy",
+    "storage_bucket": "prod-stylist-savvy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1085320474742:android:492a0bb22bce2020796f57",
+        "android_client_info": {
+          "package_name": "com.highheelsavvy.stylist"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5rXUzsPwLbVlhsPjeHsPTgN9okTZQ6o0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
