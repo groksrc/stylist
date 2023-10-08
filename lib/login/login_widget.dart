@@ -161,7 +161,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         32.0, 0.0, 0.0, 0.0),
                                     child: Text(
-                                      'Stylist Savvy Beta*',
+                                      'Stylist Savvy Beta**',
                                       style: FlutterFlowTheme.of(context)
                                           .headlineMedium
                                           .override(
