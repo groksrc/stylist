@@ -6,6 +6,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import '/backend/backend.dart';
 
+import '/backend/supabase/supabase.dart';
 import '../../auth/base_auth_user_provider.dart';
 
 import '/index.dart';
@@ -86,22 +87,74 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/',
           builder: (context, _) =>
               appStateNotifier.loggedIn ? HomeWidget() : LoginWidget(),
+          routes: [
+            FFRoute(
+              name: 'Login',
+              path: 'login',
+              builder: (context, params) => LoginWidget(),
+            ),
+            FFRoute(
+              name: 'Onboarding1',
+              path: 'onboarding1',
+              requireAuth: true,
+              builder: (context, params) => Onboarding1Widget(),
+            ),
+            FFRoute(
+              name: 'Home',
+              path: 'home',
+              requireAuth: true,
+              builder: (context, params) => HomeWidget(),
+            ),
+            FFRoute(
+              name: 'Clients',
+              path: 'clients',
+              requireAuth: true,
+              builder: (context, params) => ClientsWidget(),
+            ),
+            FFRoute(
+              name: 'ClientNew',
+              path: 'clientNew',
+              requireAuth: true,
+              builder: (context, params) => ClientNewWidget(),
+            ),
+            FFRoute(
+              name: 'Calendar',
+              path: 'calendar',
+              requireAuth: true,
+              builder: (context, params) => CalendarWidget(),
+            ),
+            FFRoute(
+              name: 'Onboarding2',
+              path: 'onboarding2',
+              requireAuth: true,
+              builder: (context, params) => Onboarding2Widget(),
+            ),
+            FFRoute(
+              name: 'Onboarding3',
+              path: 'onboarding3',
+              requireAuth: true,
+              builder: (context, params) => Onboarding3Widget(),
+            ),
+            FFRoute(
+              name: 'Onboarding4',
+              path: 'onboarding4',
+              requireAuth: true,
+              builder: (context, params) => Onboarding4Widget(),
+            ),
+            FFRoute(
+              name: 'Onboarding5',
+              path: 'onboarding5',
+              requireAuth: true,
+              builder: (context, params) => Onboarding5Widget(),
+            ),
+            FFRoute(
+              name: 'Onboarding0',
+              path: 'onboarding0',
+              requireAuth: true,
+              builder: (context, params) => Onboarding0Widget(),
+            )
+          ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
-        FFRoute(
-          name: 'Login',
-          path: '/login',
-          builder: (context, params) => LoginWidget(),
-        ),
-        FFRoute(
-          name: 'Onboarding',
-          path: '/onboarding',
-          builder: (context, params) => OnboardingWidget(),
-        ),
-        FFRoute(
-          name: 'Home',
-          path: '/home',
-          builder: (context, params) => HomeWidget(),
-        )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
 
@@ -280,15 +333,11 @@ class FFRoute {
                 )
               : builder(context, ffParams);
           final child = appStateNotifier.loading
-              ? Center(
-                  child: SizedBox(
-                    width: 50.0,
-                    height: 50.0,
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        FlutterFlowTheme.of(context).primary,
-                      ),
-                    ),
+              ? Container(
+                  color: Color(0xFFFFFEF4),
+                  child: Image.asset(
+                    'assets/images/LogoHHS_RoseGoldGradient_Black_ClearBkg_HiResWebFile_no_R.png',
+                    fit: BoxFit.contain,
                   ),
                 )
               : page;

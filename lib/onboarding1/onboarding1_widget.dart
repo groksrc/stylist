@@ -10,19 +10,19 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'onboarding_model.dart';
-export 'onboarding_model.dart';
+import 'onboarding1_model.dart';
+export 'onboarding1_model.dart';
 
-class OnboardingWidget extends StatefulWidget {
-  const OnboardingWidget({Key? key}) : super(key: key);
+class Onboarding1Widget extends StatefulWidget {
+  const Onboarding1Widget({Key? key}) : super(key: key);
 
   @override
-  _OnboardingWidgetState createState() => _OnboardingWidgetState();
+  _Onboarding1WidgetState createState() => _Onboarding1WidgetState();
 }
 
-class _OnboardingWidgetState extends State<OnboardingWidget>
+class _Onboarding1WidgetState extends State<Onboarding1Widget>
     with TickerProviderStateMixin {
-  late OnboardingModel _model;
+  late Onboarding1Model _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -215,7 +215,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => OnboardingModel());
+    _model = createModel(context, () => Onboarding1Model());
   }
 
   @override
@@ -269,7 +269,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                                     topRight: Radius.circular(16.0),
                                   ),
                                   child: Image.network(
-                                    'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW91bnRhaW5zfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=700&q=60',
+                                    'https://images.unsplash.com/photo-1580618672591-eb180b1a973f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=60',
                                     width: 120.0,
                                     height: 120.0,
                                     fit: BoxFit.cover,
@@ -278,7 +278,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                             () => ClipRRect(
                                   borderRadius: BorderRadius.circular(16.0),
                                   child: Image.network(
-                                    'https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8bW91bnRhaW5zfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=700&q=60',
+                                    'https://images.unsplash.com/photo-1600948836101-f9ffda59d250?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=60',
                                     width: 120.0,
                                     height: 160.0,
                                     fit: BoxFit.cover,
@@ -306,7 +306,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                                     topRight: Radius.circular(0.0),
                                   ),
                                   child: Image.network(
-                                    'https://images.unsplash.com/photo-1454496522488-7a8e488e8606?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8bW91bnRhaW5zfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=700&q=60',
+                                    'https://images.unsplash.com/photo-1589710751893-f9a6770ad71b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=60',
                                     width: 80.0,
                                     height: 180.0,
                                     fit: BoxFit.cover,
@@ -315,7 +315,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                             () => ClipRRect(
                                   borderRadius: BorderRadius.circular(16.0),
                                   child: Image.network(
-                                    'https://images.unsplash.com/photo-1434394354979-a235cd36269d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fG1vdW50YWluc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=700&q=60',
+                                    'https://images.unsplash.com/photo-1629397685944-7073f5589754?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=60',
                                     width: 120.0,
                                     height: 160.0,
                                     fit: BoxFit.cover,
@@ -324,7 +324,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                             () => ClipRRect(
                                   borderRadius: BorderRadius.circular(16.0),
                                   child: Image.network(
-                                    'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8bW91bnRhaW5zfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=700&q=60',
+                                    'https://images.unsplash.com/photo-1634449571010-02389ed0f9b0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
                                     width: 120.0,
                                     height: 180.0,
                                     fit: BoxFit.cover,
@@ -338,7 +338,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                                     topRight: Radius.circular(0.0),
                                   ),
                                   child: Image.network(
-                                    'https://images.unsplash.com/photo-1445363692815-ebcd599f7621?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fG1vdW50YWluc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=700&q=60',
+                                    'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=60',
                                     width: 120.0,
                                     height: 190.0,
                                     fit: BoxFit.cover,
@@ -347,7 +347,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                             () => ClipRRect(
                                   borderRadius: BorderRadius.circular(16.0),
                                   child: Image.network(
-                                    'https://images.unsplash.com/photo-1540390769625-2fc3f8b1d50c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjN8fG1vdW50YWluc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=700&q=60',
+                                    'https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=60',
                                     width: 120.0,
                                     height: 160.0,
                                     fit: BoxFit.cover,
@@ -356,7 +356,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                             () => ClipRRect(
                                   borderRadius: BorderRadius.circular(16.0),
                                   child: Image.network(
-                                    'https://images.unsplash.com/photo-1443632864897-14973fa006cf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzJ8fG1vdW50YWluc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=700&q=60',
+                                    'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=60',
                                     width: 120.0,
                                     height: 180.0,
                                     fit: BoxFit.cover,
@@ -370,7 +370,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                                     topRight: Radius.circular(0.0),
                                   ),
                                   child: Image.network(
-                                    'https://images.unsplash.com/photo-1614597396930-cd6760b99f7c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzZ8fG1vdW50YWluc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=700&q=60',
+                                    'https://images.unsplash.com/photo-1595944024804-733665a112db?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=60',
                                     width: 120.0,
                                     height: 190.0,
                                     fit: BoxFit.cover,
@@ -423,14 +423,14 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                                 children: [
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        48.0, 0.0, 48.0, 0.0),
+                                        40.0, 0.0, 40.0, 0.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          'Personalized recipe discovery',
+                                          'Welcome!',
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
                                               .displaySmall
@@ -447,7 +447,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                                               EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 16.0, 0.0, 0.0),
                                           child: Text(
-                                            'I have some great food options here!! Yum yum!!',
+                                            'We\'re excited you are here. We have a few questions to get to know you better.',
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
                                                 .labelLarge
@@ -466,14 +466,14 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        48.0, 0.0, 48.0, 0.0),
+                                        30.0, 0.0, 30.0, 0.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          'Awesome Recipes',
+                                          'We\'re Here To Help',
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
                                               .displaySmall
@@ -490,7 +490,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                                               EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 16.0, 0.0, 0.0),
                                           child: Text(
-                                            'I have some great food options here!! Yum yum!!',
+                                            'If you run in to trouble just click the help button in the navigation menu to be connected with a live agent.',
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
                                                 .labelLarge
@@ -516,7 +516,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                                           MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          'Personalized recipe discovery',
+                                          'Let\'s Go!',
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
                                               .displaySmall
@@ -533,7 +533,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                                               EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 16.0, 0.0, 0.0),
                                           child: Text(
-                                            'I have some great food options here!! Yum yum!!',
+                                            'The next few screens will guide you through the account setup process. We\'ll see you inside.',
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
                                                 .labelLarge
@@ -594,7 +594,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                             16.0, 12.0, 16.0, 0.0),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            context.pushNamed('Home');
+                            context.pushNamed('Onboarding2');
                           },
                           text: 'Next',
                           options: FFButtonOptions(
@@ -620,40 +620,6 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                             ),
                             borderRadius: BorderRadius.circular(50.0),
                             hoverColor: Color(0xFF101213),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            16.0, 12.0, 16.0, 44.0),
-                        child: FFButtonWidget(
-                          onPressed: () {
-                            print('Button pressed ...');
-                          },
-                          text: 'Skip',
-                          options: FFButtonOptions(
-                            width: double.infinity,
-                            height: 60.0,
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            color: Colors.white,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .titleLarge
-                                .override(
-                                  fontFamily: 'Urbanist',
-                                  color: Color(0xFF101213),
-                                  fontSize: 18.0,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                            elevation: 0.0,
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(50.0),
-                            hoverColor: Color(0xFFE0E3E7),
                           ),
                         ),
                       ),

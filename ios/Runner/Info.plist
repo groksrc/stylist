@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Stylist</string>
+	<string>Stylist Savvy</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -37,7 +37,7 @@
         <key>CFBundleTypeRole</key>
         <string>Editor</string>
         <key>CFBundleURLName</key>
-        <string>stylist.com</string>
+        <string>highheelsavvy.com</string>
         <key>CFBundleURLSchemes</key>
         <array>
         <string>stylist</string>
@@ -53,8 +53,12 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 
-
-
+	<key>NSCameraUsageDescription</key>
+    <string>In order to take a picture or video, this app requires permission to access the camera.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+    <string>In order to upload data, this app requires permission to access the photo library.</string>
+	<key>NSContactsUsageDescription</key>
+    <string>Allow Stylist Savvy to access your contacts?</string>
 
 
 	<key>UILaunchStoryboardName</key>

@@ -2,7 +2,7 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'onboarding_widget.dart' show OnboardingWidget;
+import 'onboarding1_widget.dart' show Onboarding1Widget;
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
 import 'package:flutter/material.dart';
@@ -12,7 +12,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class OnboardingModel extends FlutterFlowModel<OnboardingWidget> {
+class Onboarding1Model extends FlutterFlowModel<Onboarding1Widget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
