@@ -78,7 +78,9 @@ class _ClientsWidgetState extends State<ClientsWidget> {
                 false;
             if (confirmDialogResponse) {
               await requestPermission(contactsPermission);
-              if (!(await getPermissionStatus(contactsPermission))) {
+              if (await getPermissionStatus(contactsPermission)) {
+                context.pushNamed('clientAddContact');
+              } else {
                 context.pushNamed(
                   'clientAdd',
                   extra: <String, dynamic>{
