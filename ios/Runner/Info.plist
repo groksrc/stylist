@@ -58,7 +58,7 @@
 	<key>NSPhotoLibraryUsageDescription</key>
     <string>In order to upload data, this app requires permission to access the photo library.</string>
 	<key>NSContactsUsageDescription</key>
-    <string>Allow Stylist Savvy to access your contacts?</string>
+    <string>Would you like to import contacts from your device?</string>
 
 
 	<key>UILaunchStoryboardName</key>

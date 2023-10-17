@@ -35,9 +35,12 @@ class ClientsRow extends SupabaseDataRow {
   int? get birthMonth => getField<int>('birth_month');
   set birthMonth(int? value) => setField<int>('birth_month', value);
 
-  int? get birthYear => getField<int>('birth_year');
-  set birthYear(int? value) => setField<int>('birth_year', value);
+  int? get birthDay => getField<int>('birth_day');
+  set birthDay(int? value) => setField<int>('birth_day', value);
 
   DateTime get createdAt => getField<DateTime>('created_at')!;
   set createdAt(DateTime value) => setField<DateTime>('created_at', value);
+
+  String? get clientPhoto => getField<String>('client_photo');
+  set clientPhoto(String? value) => setField<String>('client_photo', value);
 }

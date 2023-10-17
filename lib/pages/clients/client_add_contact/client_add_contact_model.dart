@@ -1,18 +1,21 @@
-import '/auth/supabase_auth/auth_util.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'home_widget.dart' show HomeWidget;
-import 'package:auto_size_text/auto_size_text.dart';
+import '/custom_code/actions/index.dart' as actions;
+import 'client_add_contact_widget.dart' show ClientAddContactWidget;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class HomeModel extends FlutterFlowModel<HomeWidget> {
+class ClientAddContactModel extends FlutterFlowModel<ClientAddContactWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  // Stores action output result for [Custom Action - getDeviceContacts] action in clientAddContact widget.
+  List<ContactStruct>? deviceContacts;
 
   /// Initialization and disposal methods.
 
