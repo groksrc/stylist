@@ -1,0 +1,14 @@
+create table
+  public.clients (
+    id uuid not null default gen_random_uuid (),
+    profile_id uuid not null,
+    first_name text null,
+    last_name text null,
+    email text null,
+    phone text null,
+    birth_month integer null,
+    birth_year integer null,
+    created_at timestamp with time zone not null default now(),
+    constraint clients_pkey primary key (id),
+    constraint clients_profile_id_fkey foreign key (profile_id) references profiles (id) on delete cascade
+  ) tablespace pg_default;

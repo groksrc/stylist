@@ -1,0 +1,11 @@
+create policy "Stylists can view their own profile."
+  on stylists for select
+  using ( auth.uid() = id );
+
+create policy "Stylists can insert their own profile."
+  on stylists for insert
+  with check ( auth.uid() = id );
+
+create policy "Stylists can update own profile."
+  on stylists for update
+  using ( auth.uid() = id );

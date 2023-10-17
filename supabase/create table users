@@ -1,0 +1,14 @@
+create table
+  public.users (
+    user_id uuid not null,
+    first_name text null,
+    last_name text null,
+    email text not null,
+    phone text null,
+    business_name text null,
+    last_login timestamp with time zone null,
+    created_at timestamp with time zone not null default now(),
+    onboarded boolean not null default false,
+    constraint users_pkey primary key (user_id),
+    constraint users_user_id_fkey foreign key (user_id) references auth.users (id) on update cascade on delete cascade
+  ) tablespace pg_default;

@@ -1,0 +1,14 @@
+create table public.profiles (
+  id uuid not null references auth.users on delete cascade,
+  first_name text null,
+  last_name text null,
+  email text not null,
+  phone text null,
+  business_name text null,
+  last_login timestamp with time zone null,
+  created_at timestamp with time zone not null default now(),
+  onboarded boolean not null default false,
+  primary key (id)
+);
+
+alter table public.profiles enable row level security;
