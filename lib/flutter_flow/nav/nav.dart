@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import '/backend/backend.dart';
-
+import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
 import '../../auth/base_auth_user_provider.dart';
 
@@ -106,16 +106,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => HomeWidget(),
             ),
             FFRoute(
-              name: 'Clients',
+              name: 'clients',
               path: 'clients',
               requireAuth: true,
               builder: (context, params) => ClientsWidget(),
             ),
             FFRoute(
-              name: 'ClientNew',
-              path: 'clientNew',
+              name: 'clientAdd',
+              path: 'clientAdd',
               requireAuth: true,
-              builder: (context, params) => ClientNewWidget(),
+              builder: (context, params) => ClientAddWidget(),
             ),
             FFRoute(
               name: 'Calendar',
@@ -152,6 +152,28 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               path: 'onboarding0',
               requireAuth: true,
               builder: (context, params) => Onboarding0Widget(),
+            ),
+            FFRoute(
+              name: 'client',
+              path: 'client',
+              requireAuth: true,
+              builder: (context, params) => ClientWidget(
+                clientId: params.getParam('clientId', ParamType.String),
+              ),
+            ),
+            FFRoute(
+              name: 'clientEdit',
+              path: 'clientEdit',
+              requireAuth: true,
+              builder: (context, params) => ClientEditWidget(
+                clientId: params.getParam('clientId', ParamType.String),
+              ),
+            ),
+            FFRoute(
+              name: 'clientAddContact',
+              path: 'clientAddContact',
+              requireAuth: true,
+              builder: (context, params) => ClientAddContactWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),

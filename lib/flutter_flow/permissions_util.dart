@@ -9,6 +9,8 @@ const kPermissionStateToBool = {
   PermissionStatus.permanentlyDenied: false,
 };
 
+final cameraPermission = Permission.camera;
+final photoLibraryPermission = Permission.photos;
 final contactsPermission = Permission.contacts;
 
 Future<bool> getPermissionStatus(Permission setting) async {

@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -25,6 +26,8 @@ class _HomeWidgetState extends State<HomeWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => HomeModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -36,6 +39,8 @@ class _HomeWidgetState extends State<HomeWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -163,7 +168,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
-                          context.pushNamed('Clients');
+                          context.pushNamed('clients');
                         },
                         child: Card(
                           clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -214,7 +219,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 color: FlutterFlowTheme.of(context).primary,
                                 size: 32.0,
                               ),
-                              Text(
+                              AutoSizeText(
                                 'Calendar',
                                 style: FlutterFlowTheme.of(context).titleLarge,
                               ),
@@ -241,7 +246,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 color: FlutterFlowTheme.of(context).primary,
                                 size: 32.0,
                               ),
-                              Text(
+                              AutoSizeText(
                                 'Services',
                                 style: FlutterFlowTheme.of(context).titleLarge,
                               ),
@@ -268,7 +273,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 color: FlutterFlowTheme.of(context).primary,
                                 size: 32.0,
                               ),
-                              Text(
+                              AutoSizeText(
                                 'Products',
                                 style: FlutterFlowTheme.of(context).titleLarge,
                               ),
@@ -295,7 +300,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 color: FlutterFlowTheme.of(context).primary,
                                 size: 32.0,
                               ),
-                              Text(
+                              AutoSizeText(
                                 'Reviews',
                                 style: FlutterFlowTheme.of(context).titleLarge,
                               ),
