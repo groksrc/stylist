@@ -290,8 +290,7 @@ class _ClientAddContactWidgetState extends State<ClientAddContactWidget> {
                               0.0, 10.0, 0.0, 0.0),
                           child: Builder(
                             builder: (context) {
-                              final contact =
-                                  _model.simpleSearchResults.toList();
+                              final contact = _model.deviceContacts.toList();
                               return ListView.builder(
                                 padding: EdgeInsets.zero,
                                 shrinkWrap: true,
@@ -328,11 +327,7 @@ class _ClientAddContactWidgetState extends State<ClientAddContactWidget> {
                                             _model.upsertClientFromContactResult =
                                                 await actions
                                                     .upsertClientFromContact(
-                                              _model.deviceContacts
-                                                  .where((e) =>
-                                                      contactItem == e.fullName)
-                                                  .toList()
-                                                  .first,
+                                              contactItem,
                                               currentUserUid,
                                             );
                                             if (!_model
@@ -361,17 +356,13 @@ class _ClientAddContactWidgetState extends State<ClientAddContactWidget> {
                                           } else {
                                             await actions
                                                 .deleteClientFromContact(
-                                              _model.deviceContacts
-                                                  .where((e) =>
-                                                      contactItem == e.fullName)
-                                                  .toList()
-                                                  .first,
+                                              contactItem,
                                               currentUserUid,
                                             );
                                           }
                                         },
                                         title: Text(
-                                          contactItem,
+                                          contactItem.fullName,
                                           style: FlutterFlowTheme.of(context)
                                               .titleLarge,
                                         ),
