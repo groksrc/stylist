@@ -19,7 +19,7 @@ Future<bool> deleteClientFromContact(
     ContactStruct contact, String stylistId) async {
   final supabase = Supabase.instance.client;
 
-  if (contact.id.isNotEmpty()) {
+  if (contact.id.isNotEmpty) {
     final response = await supabase
         .from('clients')
         .update({'archived': true}).match(

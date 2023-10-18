@@ -16,7 +16,7 @@ Future<bool> upsertClientFromContact(
     ContactStruct contact, String stylistId) async {
   final supabase = Supabase.instance.client;
 
-  if (contact.id.isNotEmpty()) {
+  if (contact.id.isNotEmpty) {
     final response = await supabase.from('clients').upsert({
       'stylist_id': stylistId,
       'first_name': contact.firstName,
@@ -25,9 +25,11 @@ Future<bool> upsertClientFromContact(
       'phone': contact.phone,
       'contact_identifier': contact.id,
       'archived': false
-    }, onConflict: 'contact_identifier, stylist_id');
+    },
+        options: const FetchOptions(count: CountOption.exact),
+        onConflict: 'contact_identifier, stylist_id');
 
-    return response.error == null;
+    return response.count == 1;
   }
   return false;
 }
