@@ -28,3 +28,7 @@ List<int> daysInMonth(int month) {
 
   return List.generate(days, (index) => index + 1);
 }
+
+List<ContactStruct> emptyContactList() {
+  return [];
+}
