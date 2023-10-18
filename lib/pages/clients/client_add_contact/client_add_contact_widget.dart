@@ -265,7 +265,7 @@ class _ClientAddContactWidgetState extends State<ClientAddContactWidget> {
                                           }
                                         },
                                         title: Text(
-                                          '${contactItem.firstName} ${contactItem.lastName}',
+                                          contactItem.fullName,
                                           style: FlutterFlowTheme.of(context)
                                               .titleLarge,
                                         ),
@@ -306,7 +306,7 @@ class _ClientAddContactWidgetState extends State<ClientAddContactWidget> {
                           child: Builder(
                             builder: (context) {
                               final filteredContact =
-                                  _model.deviceContacts.toList();
+                                  _model.simpleSearchResults.toList();
                               return ListView.builder(
                                 padding: EdgeInsets.zero,
                                 shrinkWrap: true,
@@ -344,7 +344,12 @@ class _ClientAddContactWidgetState extends State<ClientAddContactWidget> {
                                             _model.upsertClientFromFilteredContactResult =
                                                 await actions
                                                     .upsertClientFromContact(
-                                              filteredContactItem,
+                                              _model.deviceContacts
+                                                  .where((e) =>
+                                                      e.fullName ==
+                                                      filteredContactItem)
+                                                  .toList()
+                                                  .first,
                                               currentUserUid,
                                             );
                                             if (!_model
@@ -373,13 +378,18 @@ class _ClientAddContactWidgetState extends State<ClientAddContactWidget> {
                                           } else {
                                             await actions
                                                 .deleteClientFromContact(
-                                              filteredContactItem,
+                                              _model.deviceContacts
+                                                  .where((e) =>
+                                                      e.fullName ==
+                                                      filteredContactItem)
+                                                  .toList()
+                                                  .first,
                                               currentUserUid,
                                             );
                                           }
                                         },
                                         title: Text(
-                                          '${filteredContactItem.firstName} ${filteredContactItem.lastName}',
+                                          filteredContactItem,
                                           style: FlutterFlowTheme.of(context)
                                               .titleLarge,
                                         ),

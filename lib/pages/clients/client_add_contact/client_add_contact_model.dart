@@ -64,8 +64,8 @@ class ClientAddContactModel extends FlutterFlowModel<ClientAddContactWidget> {
   bool? upsertClientFromContactResult;
   // State field(s) for CheckboxListTile widget.
 
-  Map<ContactStruct, bool> checkboxListTileValueMap2 = {};
-  List<ContactStruct> get checkboxListTileCheckedItems2 =>
+  Map<String, bool> checkboxListTileValueMap2 = {};
+  List<String> get checkboxListTileCheckedItems2 =>
       checkboxListTileValueMap2.entries
           .where((e) => e.value)
           .map((e) => e.key)
