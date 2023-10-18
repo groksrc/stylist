@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-import 'package:supabase/supabase.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<bool> upsertClientFromContact(
     ContactStruct contact, String stylistId) async {
@@ -23,14 +23,11 @@ Future<bool> upsertClientFromContact(
       'last_name': contact.lastName,
       'email': contact.email,
       'phone': contact.phone,
-      'birth_month': contact.birthMonth,
-      'birth_day': contact.birthDay,
       'contact_identifier': contact.id,
       'archived': false
     }, onConflict: 'contact_identifier, stylist_id');
 
     return response.error == null;
   }
-
   return false;
 }

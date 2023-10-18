@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
 import 'package:flutter_contacts/flutter_contacts.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 // Set your action name, define your arguments and return parameter,
 // and then add the boilerplate code using the button on the right!
