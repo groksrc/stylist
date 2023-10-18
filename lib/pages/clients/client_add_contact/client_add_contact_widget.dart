@@ -128,83 +128,71 @@ class _ClientAddContactWidgetState extends State<ClientAddContactWidget> {
             children: [
               if (_model.deviceContacts!.length > 0)
                 Expanded(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Expanded(
-                        child: Builder(
-                          builder: (context) {
-                            final contact = _model.deviceContacts!.toList();
-                            return ListView.builder(
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
-                              scrollDirection: Axis.vertical,
-                              itemCount: contact.length,
-                              itemBuilder: (context, contactIndex) {
-                                final contactItem = contact[contactIndex];
-                                return Container(
-                                  width: double.infinity,
-                                  height: 160.0,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                  ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
+                  child: Builder(
+                    builder: (context) {
+                      final contact = _model.deviceContacts!.toList();
+                      return ListView.builder(
+                        padding: EdgeInsets.zero,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        itemCount: contact.length,
+                        itemBuilder: (context, contactIndex) {
+                          final contactItem = contact[contactIndex];
+                          return Container(
+                            width: double.infinity,
+                            height: 160.0,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Expanded(
+                                  child: Wrap(
+                                    spacing: 0.0,
+                                    runSpacing: 0.0,
+                                    alignment: WrapAlignment.start,
+                                    crossAxisAlignment:
+                                        WrapCrossAlignment.start,
+                                    direction: Axis.horizontal,
+                                    runAlignment: WrapAlignment.start,
+                                    verticalDirection: VerticalDirection.down,
+                                    clipBehavior: Clip.none,
                                     children: [
-                                      Expanded(
-                                        child: Wrap(
-                                          spacing: 0.0,
-                                          runSpacing: 0.0,
-                                          alignment: WrapAlignment.start,
-                                          crossAxisAlignment:
-                                              WrapCrossAlignment.start,
-                                          direction: Axis.horizontal,
-                                          runAlignment: WrapAlignment.start,
-                                          verticalDirection:
-                                              VerticalDirection.down,
-                                          clipBehavior: Clip.none,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      30.0, 0.0, 0.0, 0.0),
-                                              child: Text(
-                                                valueOrDefault<String>(
-                                                  contactItem.firstName,
-                                                  '?',
-                                                ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .headlineMedium,
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      30.0, 0.0, 0.0, 0.0),
-                                              child: Text(
-                                                valueOrDefault<String>(
-                                                  contactItem.lastName,
-                                                  '?',
-                                                ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .headlineMedium,
-                                              ),
-                                            ),
-                                          ],
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            30.0, 0.0, 0.0, 0.0),
+                                        child: Text(
+                                          valueOrDefault<String>(
+                                            contactItem.firstName,
+                                            '?',
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .headlineMedium,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            30.0, 0.0, 0.0, 0.0),
+                                        child: Text(
+                                          valueOrDefault<String>(
+                                            contactItem.lastName,
+                                            '?',
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .headlineMedium,
                                         ),
                                       ),
                                     ],
                                   ),
-                                );
-                              },
-                            );
-                          },
-                        ),
-                      ),
-                    ],
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    },
                   ),
                 ),
             ],
