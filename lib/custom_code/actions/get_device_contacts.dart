@@ -33,6 +33,7 @@ Future<List<ContactStruct>> getDeviceContacts() async {
 
       return ContactStruct(
         id: contact.id,
+        fullName: contact.displayName,
         firstName: firstName,
         lastName: lastName,
         email: contact.emails.isNotEmpty ? contact.emails[0].address : "",

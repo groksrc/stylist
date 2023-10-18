@@ -15,12 +15,14 @@ class ContactStruct extends FFFirebaseStruct {
     String? lastName,
     String? phone,
     String? email,
+    String? fullName,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _id = id,
         _firstName = firstName,
         _lastName = lastName,
         _phone = phone,
         _email = email,
+        _fullName = fullName,
         super(firestoreUtilData);
 
   // "id" field.
@@ -53,12 +55,19 @@ class ContactStruct extends FFFirebaseStruct {
   set email(String? val) => _email = val;
   bool hasEmail() => _email != null;
 
+  // "full_name" field.
+  String? _fullName;
+  String get fullName => _fullName ?? '';
+  set fullName(String? val) => _fullName = val;
+  bool hasFullName() => _fullName != null;
+
   static ContactStruct fromMap(Map<String, dynamic> data) => ContactStruct(
         id: data['id'] as String?,
         firstName: data['first_name'] as String?,
         lastName: data['last_name'] as String?,
         phone: data['phone'] as String?,
         email: data['email'] as String?,
+        fullName: data['full_name'] as String?,
       );
 
   static ContactStruct? maybeFromMap(dynamic data) =>
@@ -70,6 +79,7 @@ class ContactStruct extends FFFirebaseStruct {
         'last_name': _lastName,
         'phone': _phone,
         'email': _email,
+        'full_name': _fullName,
       }.withoutNulls;
 
   @override
@@ -92,6 +102,10 @@ class ContactStruct extends FFFirebaseStruct {
         ),
         'email': serializeParam(
           _email,
+          ParamType.String,
+        ),
+        'full_name': serializeParam(
+          _fullName,
           ParamType.String,
         ),
       }.withoutNulls;
@@ -123,6 +137,11 @@ class ContactStruct extends FFFirebaseStruct {
           ParamType.String,
           false,
         ),
+        fullName: deserializeParam(
+          data['full_name'],
+          ParamType.String,
+          false,
+        ),
       );
 
   @override
@@ -135,12 +154,13 @@ class ContactStruct extends FFFirebaseStruct {
         firstName == other.firstName &&
         lastName == other.lastName &&
         phone == other.phone &&
-        email == other.email;
+        email == other.email &&
+        fullName == other.fullName;
   }
 
   @override
-  int get hashCode =>
-      const ListEquality().hash([id, firstName, lastName, phone, email]);
+  int get hashCode => const ListEquality()
+      .hash([id, firstName, lastName, phone, email, fullName]);
 }
 
 ContactStruct createContactStruct({
@@ -149,6 +169,7 @@ ContactStruct createContactStruct({
   String? lastName,
   String? phone,
   String? email,
+  String? fullName,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -160,6 +181,7 @@ ContactStruct createContactStruct({
       lastName: lastName,
       phone: phone,
       email: email,
+      fullName: fullName,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,
