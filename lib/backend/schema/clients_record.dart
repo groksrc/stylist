@@ -61,6 +61,11 @@ class ClientsRecord extends FirestoreRecord {
   DateTime? get modifiedAt => _modifiedAt;
   bool hasModifiedAt() => _modifiedAt != null;
 
+  // "contact_identifier" field.
+  String? _contactIdentifier;
+  String get contactIdentifier => _contactIdentifier ?? '';
+  bool hasContactIdentifier() => _contactIdentifier != null;
+
   void _initializeFields() {
     _uid = snapshotData['uid'] as String?;
     _name = snapshotData['name'] as String?;
@@ -71,6 +76,7 @@ class ClientsRecord extends FirestoreRecord {
     _birthYear = castToType<int>(snapshotData['birth_year']);
     _createdAt = snapshotData['created_at'] as DateTime?;
     _modifiedAt = snapshotData['modified_at'] as DateTime?;
+    _contactIdentifier = snapshotData['contact_identifier'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -117,6 +123,7 @@ Map<String, dynamic> createClientsRecordData({
   int? birthYear,
   DateTime? createdAt,
   DateTime? modifiedAt,
+  String? contactIdentifier,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -129,6 +136,7 @@ Map<String, dynamic> createClientsRecordData({
       'birth_year': birthYear,
       'created_at': createdAt,
       'modified_at': modifiedAt,
+      'contact_identifier': contactIdentifier,
     }.withoutNulls,
   );
 
@@ -148,7 +156,8 @@ class ClientsRecordDocumentEquality implements Equality<ClientsRecord> {
         e1?.birthMonth == e2?.birthMonth &&
         e1?.birthYear == e2?.birthYear &&
         e1?.createdAt == e2?.createdAt &&
-        e1?.modifiedAt == e2?.modifiedAt;
+        e1?.modifiedAt == e2?.modifiedAt &&
+        e1?.contactIdentifier == e2?.contactIdentifier;
   }
 
   @override
@@ -161,7 +170,8 @@ class ClientsRecordDocumentEquality implements Equality<ClientsRecord> {
         e?.birthMonth,
         e?.birthYear,
         e?.createdAt,
-        e?.modifiedAt
+        e?.modifiedAt,
+        e?.contactIdentifier
       ]);
 
   @override

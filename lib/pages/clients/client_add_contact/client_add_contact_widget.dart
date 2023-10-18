@@ -1,3 +1,4 @@
+import '/auth/supabase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -136,57 +137,107 @@ class _ClientAddContactWidgetState extends State<ClientAddContactWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Expanded(
-                child: Builder(
-                  builder: (context) {
-                    final contact = _model.deviceContacts.toList();
-                    return ListView.builder(
-                      padding: EdgeInsets.zero,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      itemCount: contact.length,
-                      itemBuilder: (context, contactIndex) {
-                        final contactItem = contact[contactIndex];
-                        return Theme(
-                          data: ThemeData(
-                            checkboxTheme: CheckboxThemeData(
-                              visualDensity: VisualDensity.standard,
-                              materialTapTargetSize:
-                                  MaterialTapTargetSize.padded,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(25),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Builder(
+                      builder: (context) {
+                        final contact = _model.deviceContacts.toList();
+                        return ListView.builder(
+                          padding: EdgeInsets.zero,
+                          shrinkWrap: true,
+                          scrollDirection: Axis.vertical,
+                          itemCount: contact.length,
+                          itemBuilder: (context, contactIndex) {
+                            final contactItem = contact[contactIndex];
+                            return Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  5.0, 5.0, 5.0, 5.0),
+                              child: Theme(
+                                data: ThemeData(
+                                  checkboxTheme: CheckboxThemeData(
+                                    visualDensity: VisualDensity.standard,
+                                    materialTapTargetSize:
+                                        MaterialTapTargetSize.padded,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(25),
+                                    ),
+                                  ),
+                                  unselectedWidgetColor:
+                                      FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                ),
+                                child: CheckboxListTile(
+                                  value: _model.checkboxListTileValueMap[
+                                      contactItem] ??= false,
+                                  onChanged: (newValue) async {
+                                    setState(() =>
+                                        _model.checkboxListTileValueMap[
+                                            contactItem] = newValue!);
+                                    if (newValue!) {
+                                      _model.upsertClientFromContactResult =
+                                          await actions.upsertClientFromContact(
+                                        contactItem,
+                                        currentUserUid,
+                                      );
+                                      if (!_model
+                                          .upsertClientFromContactResult!) {
+                                        await showDialog(
+                                          context: context,
+                                          builder: (alertDialogContext) {
+                                            return AlertDialog(
+                                              title: Text('Error'),
+                                              content: Text(
+                                                  'The contact could not be imported'),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          alertDialogContext),
+                                                  child: Text('Ok'),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
+                                      }
+
+                                      setState(() {});
+                                    } else {
+                                      await actions.deleteClientFromContact(
+                                        contactItem,
+                                        currentUserUid,
+                                      );
+                                    }
+                                  },
+                                  title: Text(
+                                    '${contactItem.firstName} ${contactItem.lastName}',
+                                    style:
+                                        FlutterFlowTheme.of(context).titleLarge,
+                                  ),
+                                  tileColor: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  activeColor:
+                                      FlutterFlowTheme.of(context).secondary,
+                                  checkColor:
+                                      FlutterFlowTheme.of(context).accent3,
+                                  dense: false,
+                                  controlAffinity:
+                                      ListTileControlAffinity.leading,
+                                  contentPadding:
+                                      EdgeInsetsDirectional.fromSTEB(
+                                          5.0, 5.0, 5.0, 5.0),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                ),
                               ),
-                            ),
-                            unselectedWidgetColor:
-                                FlutterFlowTheme.of(context).secondaryText,
-                          ),
-                          child: CheckboxListTile(
-                            value:
-                                _model.checkboxListTileValueMap[contactItem] ??=
-                                    false,
-                            onChanged: (newValue) async {
-                              setState(() =>
-                                  _model.checkboxListTileValueMap[contactItem] =
-                                      newValue!);
-                            },
-                            title: Text(
-                              '${contactItem.firstName} ${contactItem.lastName}',
-                              style: FlutterFlowTheme.of(context).titleLarge,
-                            ),
-                            subtitle: Text(
-                              '${contactItem.phone}   ${contactItem.email}',
-                              style: FlutterFlowTheme.of(context).labelMedium,
-                            ),
-                            tileColor: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            activeColor: FlutterFlowTheme.of(context).secondary,
-                            checkColor: FlutterFlowTheme.of(context).accent3,
-                            dense: false,
-                            controlAffinity: ListTileControlAffinity.leading,
-                          ),
+                            );
+                          },
                         );
                       },
-                    );
-                  },
+                    ),
+                  ],
                 ),
               ),
             ],

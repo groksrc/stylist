@@ -1,3 +1,4 @@
+import '/auth/supabase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -40,6 +41,9 @@ class ClientAddContactModel extends FlutterFlowModel<ClientAddContactWidget> {
           .where((e) => e.value)
           .map((e) => e.key)
           .toList();
+
+  // Stores action output result for [Custom Action - upsertClientFromContact] action in CheckboxListTile widget.
+  bool? upsertClientFromContactResult;
 
   /// Initialization and disposal methods.
 
