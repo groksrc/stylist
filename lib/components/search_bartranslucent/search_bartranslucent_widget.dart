@@ -1,14 +1,21 @@
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:text_search/text_search.dart';
 import 'search_bartranslucent_model.dart';
 export 'search_bartranslucent_model.dart';
 
 class SearchBartranslucentWidget extends StatefulWidget {
-  const SearchBartranslucentWidget({Key? key}) : super(key: key);
+  const SearchBartranslucentWidget({
+    Key? key,
+    required this.searchItems,
+  }) : super(key: key);
+
+  final List<String>? searchItems;
 
   @override
   _SearchBartranslucentWidgetState createState() =>
@@ -73,7 +80,18 @@ class _SearchBartranslucentWidgetState
                   onChanged: (_) => EasyDebounce.debounce(
                     '_model.textController',
                     Duration(milliseconds: 2000),
-                    () => setState(() {}),
+                    () async {
+                      safeSetState(() {
+                        _model.simpleSearchResults = TextSearch(widget
+                                .searchItems!
+                                .map((str) => TextSearchItem(str, [str]))
+                                .toList())
+                            .search(_model.textController.text)
+                            .map((r) => r.object)
+                            .toList();
+                        ;
+                      });
+                    },
                   ),
                   obscureText: false,
                   decoration: InputDecoration(

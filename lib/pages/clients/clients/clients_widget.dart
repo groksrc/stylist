@@ -244,7 +244,9 @@ class _ClientsWidgetState extends State<ClientsWidget> {
                               child: wrapWithModel(
                                 model: _model.searchBartranslucentModel,
                                 updateCallback: () => setState(() {}),
-                                child: SearchBartranslucentWidget(),
+                                child: SearchBartranslucentWidget(
+                                  searchItems: [],
+                                ),
                               ),
                             ),
                           ),
