@@ -172,6 +172,10 @@ class _ClientAddContactWidgetState extends State<ClientAddContactWidget> {
                               '${contactItem.firstName} ${contactItem.lastName}',
                               style: FlutterFlowTheme.of(context).titleLarge,
                             ),
+                            subtitle: Text(
+                              '${contactItem.phone}   ${contactItem.email}',
+                              style: FlutterFlowTheme.of(context).labelMedium,
+                            ),
                             tileColor: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
                             activeColor: FlutterFlowTheme.of(context).secondary,
