@@ -43,9 +43,12 @@ class _ClientAddContactWidgetState extends State<ClientAddContactWidget> {
       setState(() {
         _model.deviceContacts = _model.contacts!.toList().cast<ContactStruct>();
       });
+      setState(() {
+        _model.searchController?.text = '';
+      });
     });
 
-    _model.textController ??= TextEditingController();
+    _model.searchController ??= TextEditingController();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -182,10 +185,10 @@ class _ClientAddContactWidgetState extends State<ClientAddContactWidget> {
                                               EdgeInsetsDirectional.fromSTEB(
                                                   4.0, 0.0, 0.0, 0.0),
                                           child: TextFormField(
-                                            controller: _model.textController,
+                                            controller: _model.searchController,
                                             onChanged: (_) =>
                                                 EasyDebounce.debounce(
-                                              '_model.textController',
+                                              '_model.searchController',
                                               Duration(milliseconds: 2000),
                                               () async {
                                                 safeSetState(() {
@@ -201,7 +204,7 @@ class _ClientAddContactWidgetState extends State<ClientAddContactWidget> {
                                                                       [str]))
                                                               .toList())
                                                           .search(_model
-                                                              .textController
+                                                              .searchController
                                                               .text)
                                                           .map((r) => r.object)
                                                           .toList();
@@ -267,7 +270,7 @@ class _ClientAddContactWidgetState extends State<ClientAddContactWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyLarge,
                                             validator: _model
-                                                .textControllerValidator
+                                                .searchControllerValidator
                                                 .asValidator(context),
                                           ),
                                         ),

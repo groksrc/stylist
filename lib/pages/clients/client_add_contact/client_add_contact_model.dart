@@ -35,9 +35,9 @@ class ClientAddContactModel extends FlutterFlowModel<ClientAddContactWidget> {
   final unfocusNode = FocusNode();
   // Stores action output result for [Custom Action - getDeviceContacts] action in clientAddContact widget.
   List<ContactStruct>? contacts;
-  // State field(s) for TextField widget.
-  TextEditingController? textController;
-  String? Function(BuildContext, String?)? textControllerValidator;
+  // State field(s) for search widget.
+  TextEditingController? searchController;
+  String? Function(BuildContext, String?)? searchControllerValidator;
   List<String> simpleSearchResults = [];
   // State field(s) for CheckboxListTile widget.
 
@@ -57,7 +57,7 @@ class ClientAddContactModel extends FlutterFlowModel<ClientAddContactWidget> {
 
   void dispose() {
     unfocusNode.dispose();
-    textController?.dispose();
+    searchController?.dispose();
   }
 
   /// Action blocks are added here.
