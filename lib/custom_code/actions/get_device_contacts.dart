@@ -19,7 +19,9 @@ Future<List<ContactStruct>> getDeviceContacts() async {
   // Request contact permission
   if (await FlutterContacts.requestPermission()) {
     // Get all contacts (lightly fetched)
-    List<Contact> contacts = await FlutterContacts.getContacts();
+    List<Contact> contacts = await FlutterContacts.getContacts(
+        // withProperties: true, withPhoto: true);
+        withProperties: true);
 
     // Map Contact objects to ContactStruct objects
     customContacts = contacts.map((contact) {
@@ -34,10 +36,8 @@ Future<List<ContactStruct>> getDeviceContacts() async {
         firstName: firstName,
         lastName: lastName,
         email: contact.emails.isNotEmpty ? contact.emails[0].address : "",
-        phone: contact.phones.isNotEmpty
-            ? contact.phones.first.normalizedNumber
-            : "",
-        //photo: contact.photo ?? "",
+        phone: contact.phones.isNotEmpty ? contact.phones.first.number : "",
+        //photo: contact.photo ?? "", // TODO: deal with the unsigned byte array
       );
     }).toList();
   }
