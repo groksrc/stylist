@@ -1,14 +1,11 @@
 import '/auth/supabase_auth/auth_util.dart';
 import '/components/client_details/client_details_widget.dart';
-import '/components/request_contacts_permissions/request_contacts_permissions_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'client_add_widget.dart' show ClientAddWidget;
-import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 

@@ -146,55 +146,38 @@ class _ClientAddContactWidgetState extends State<ClientAddContactWidget> {
                       itemCount: contact.length,
                       itemBuilder: (context, contactIndex) {
                         final contactItem = contact[contactIndex];
-                        return Container(
-                          width: double.infinity,
-                          height: 160.0,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Expanded(
-                                child: Wrap(
-                                  spacing: 0.0,
-                                  runSpacing: 0.0,
-                                  alignment: WrapAlignment.start,
-                                  crossAxisAlignment: WrapCrossAlignment.start,
-                                  direction: Axis.horizontal,
-                                  runAlignment: WrapAlignment.start,
-                                  verticalDirection: VerticalDirection.down,
-                                  clipBehavior: Clip.none,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          30.0, 0.0, 0.0, 0.0),
-                                      child: Text(
-                                        valueOrDefault<String>(
-                                          contactItem.firstName,
-                                          '?',
-                                        ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .headlineMedium,
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          30.0, 0.0, 0.0, 0.0),
-                                      child: Text(
-                                        valueOrDefault<String>(
-                                          contactItem.lastName,
-                                          '?',
-                                        ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .headlineMedium,
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                        return Theme(
+                          data: ThemeData(
+                            checkboxTheme: CheckboxThemeData(
+                              visualDensity: VisualDensity.standard,
+                              materialTapTargetSize:
+                                  MaterialTapTargetSize.padded,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(25),
                               ),
-                            ],
+                            ),
+                            unselectedWidgetColor:
+                                FlutterFlowTheme.of(context).secondaryText,
+                          ),
+                          child: CheckboxListTile(
+                            value:
+                                _model.checkboxListTileValueMap[contactItem] ??=
+                                    false,
+                            onChanged: (newValue) async {
+                              setState(() =>
+                                  _model.checkboxListTileValueMap[contactItem] =
+                                      newValue!);
+                            },
+                            title: Text(
+                              '${contactItem.firstName} ${contactItem.lastName}',
+                              style: FlutterFlowTheme.of(context).titleLarge,
+                            ),
+                            tileColor: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            activeColor: FlutterFlowTheme.of(context).secondary,
+                            checkColor: FlutterFlowTheme.of(context).accent3,
+                            dense: false,
+                            controlAffinity: ListTileControlAffinity.leading,
                           ),
                         );
                       },

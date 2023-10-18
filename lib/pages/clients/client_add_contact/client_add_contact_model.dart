@@ -32,6 +32,14 @@ class ClientAddContactModel extends FlutterFlowModel<ClientAddContactWidget> {
   final unfocusNode = FocusNode();
   // Stores action output result for [Custom Action - getDeviceContacts] action in clientAddContact widget.
   List<ContactStruct>? contacts;
+  // State field(s) for CheckboxListTile widget.
+
+  Map<ContactStruct, bool> checkboxListTileValueMap = {};
+  List<ContactStruct> get checkboxListTileCheckedItems =>
+      checkboxListTileValueMap.entries
+          .where((e) => e.value)
+          .map((e) => e.key)
+          .toList();
 
   /// Initialization and disposal methods.
 
