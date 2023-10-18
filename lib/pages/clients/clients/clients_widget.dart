@@ -263,6 +263,10 @@ class _ClientsWidgetState extends State<ClientsWidget> {
                                           'stylist_id',
                                           currentUserUid,
                                         )
+                                        .eq(
+                                          'archived',
+                                          false,
+                                        )
                                         .order('first_name', ascending: true),
                                   )))
                                 .future,

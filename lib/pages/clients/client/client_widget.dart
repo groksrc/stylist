@@ -605,7 +605,10 @@ class _ClientWidgetState extends State<ClientWidget> {
                                       if (confirmDialogResponse) {
                                         await deleteSupabaseFileFromPublicUrl(
                                             clientClientsRow!.clientPhoto!);
-                                        await ClientsTable().delete(
+                                        await ClientsTable().update(
+                                          data: {
+                                            'archived': true,
+                                          },
                                           matchingRows: (rows) => rows.eq(
                                             'id',
                                             widget.clientId,

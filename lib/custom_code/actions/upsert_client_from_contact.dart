@@ -24,6 +24,8 @@ Future<bool> upsertClientFromContact(
       'email': contact.email,
       'phone': contact.phone,
       'contact_identifier': contact.id,
+      'birth_month': 0,
+      'birth_day': 0,
       'archived': false
     },
         options: const FetchOptions(count: CountOption.exact),

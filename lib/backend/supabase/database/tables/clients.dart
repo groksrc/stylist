@@ -43,4 +43,11 @@ class ClientsRow extends SupabaseDataRow {
 
   String? get clientPhoto => getField<String>('client_photo');
   set clientPhoto(String? value) => setField<String>('client_photo', value);
+
+  String? get contactIdentifier => getField<String>('contact_identifier');
+  set contactIdentifier(String? value) =>
+      setField<String>('contact_identifier', value);
+
+  bool get archived => getField<bool>('archived')!;
+  set archived(bool value) => setField<bool>('archived', value);
 }
