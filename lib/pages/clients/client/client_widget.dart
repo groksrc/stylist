@@ -603,8 +603,13 @@ class _ClientWidgetState extends State<ClientWidget> {
                                               ) ??
                                               false;
                                       if (confirmDialogResponse) {
-                                        await deleteSupabaseFileFromPublicUrl(
-                                            clientClientsRow!.clientPhoto!);
+                                        if (clientClientsRow?.clientPhoto !=
+                                                null &&
+                                            clientClientsRow?.clientPhoto !=
+                                                '') {
+                                          await deleteSupabaseFileFromPublicUrl(
+                                              clientClientsRow!.clientPhoto!);
+                                        }
                                         await ClientsTable().update(
                                           data: {
                                             'archived': true,
