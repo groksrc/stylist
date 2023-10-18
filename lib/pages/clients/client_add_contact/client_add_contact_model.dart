@@ -41,15 +41,26 @@ class ClientAddContactModel extends FlutterFlowModel<ClientAddContactWidget> {
   List<String> simpleSearchResults = [];
   // State field(s) for CheckboxListTile widget.
 
-  Map<String, bool> checkboxListTileValueMap = {};
-  List<String> get checkboxListTileCheckedItems =>
-      checkboxListTileValueMap.entries
+  Map<String, bool> checkboxListTileValueMap1 = {};
+  List<String> get checkboxListTileCheckedItems1 =>
+      checkboxListTileValueMap1.entries
           .where((e) => e.value)
           .map((e) => e.key)
           .toList();
 
   // Stores action output result for [Custom Action - upsertClientFromContact] action in CheckboxListTile widget.
   bool? upsertClientFromContactResult;
+  // State field(s) for CheckboxListTile widget.
+
+  Map<String, bool> checkboxListTileValueMap2 = {};
+  List<String> get checkboxListTileCheckedItems2 =>
+      checkboxListTileValueMap2.entries
+          .where((e) => e.value)
+          .map((e) => e.key)
+          .toList();
+
+  // Stores action output result for [Custom Action - upsertClientFromContact] action in CheckboxListTile widget.
+  bool? upsertClientFromFilteredContactResult;
 
   /// Initialization and disposal methods.
 
