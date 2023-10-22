@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:text_search/text_search.dart';
@@ -38,6 +39,7 @@ class _SearchBartranslucentWidgetState
     _model = createModel(context, () => SearchBartranslucentModel());
 
     _model.textController ??= TextEditingController();
+    _model.textFieldFocusNode ??= FocusNode();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -77,6 +79,7 @@ class _SearchBartranslucentWidgetState
                 padding: EdgeInsetsDirectional.fromSTEB(4.0, 0.0, 0.0, 0.0),
                 child: TextFormField(
                   controller: _model.textController,
+                  focusNode: _model.textFieldFocusNode,
                   onChanged: (_) => EasyDebounce.debounce(
                     '_model.textController',
                     Duration(milliseconds: 2000),

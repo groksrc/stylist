@@ -11,6 +11,7 @@ import 'client_add_contact_widget.dart' show ClientAddContactWidget;
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:text_search/text_search.dart';
@@ -36,6 +37,7 @@ class ClientAddContactModel extends FlutterFlowModel<ClientAddContactWidget> {
   // Stores action output result for [Custom Action - getDeviceContacts] action in clientAddContact widget.
   List<ContactStruct>? contacts;
   // State field(s) for search widget.
+  FocusNode? searchFocusNode;
   TextEditingController? searchController;
   String? Function(BuildContext, String?)? searchControllerValidator;
   List<String> simpleSearchResults = [];
@@ -68,6 +70,7 @@ class ClientAddContactModel extends FlutterFlowModel<ClientAddContactWidget> {
 
   void dispose() {
     unfocusNode.dispose();
+    searchFocusNode?.dispose();
     searchController?.dispose();
   }
 

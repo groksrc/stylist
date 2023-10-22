@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'onboarding2_model.dart';
@@ -29,7 +30,9 @@ class _Onboarding2WidgetState extends State<Onboarding2Widget> {
     _model = createModel(context, () => Onboarding2Model());
 
     _model.firstNameController ??= TextEditingController();
+    _model.firstNameFocusNode ??= FocusNode();
     _model.lastNameController ??= TextEditingController();
+    _model.lastNameFocusNode ??= FocusNode();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -42,6 +45,15 @@ class _Onboarding2WidgetState extends State<Onboarding2Widget> {
 
   @override
   Widget build(BuildContext context) {
+    if (isiOS) {
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+          statusBarBrightness: Theme.of(context).brightness,
+          systemStatusBarContrastEnforced: true,
+        ),
+      );
+    }
+
     context.watch<FFAppState>();
 
     return Scaffold(
@@ -287,6 +299,7 @@ class _Onboarding2WidgetState extends State<Onboarding2Widget> {
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 32.0, 0.0, 16.0),
                 child: TextFormField(
                   controller: _model.firstNameController,
+                  focusNode: _model.firstNameFocusNode,
                   textCapitalization: TextCapitalization.words,
                   obscureText: false,
                   decoration: InputDecoration(
@@ -335,6 +348,7 @@ class _Onboarding2WidgetState extends State<Onboarding2Widget> {
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                 child: TextFormField(
                   controller: _model.lastNameController,
+                  focusNode: _model.lastNameFocusNode,
                   textCapitalization: TextCapitalization.words,
                   obscureText: false,
                   decoration: InputDecoration(

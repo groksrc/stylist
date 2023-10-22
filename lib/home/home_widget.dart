@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'home_model.dart';
@@ -39,6 +40,15 @@ class _HomeWidgetState extends State<HomeWidget> {
 
   @override
   Widget build(BuildContext context) {
+    if (isiOS) {
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+          statusBarBrightness: Theme.of(context).brightness,
+          systemStatusBarContrastEnforced: true,
+        ),
+      );
+    }
+
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -168,7 +178,15 @@ class _HomeWidgetState extends State<HomeWidget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
-                          context.pushNamed('clients');
+                          context.pushNamed(
+                            'clients',
+                            extra: <String, dynamic>{
+                              kTransitionInfoKey: TransitionInfo(
+                                hasTransition: true,
+                                transitionType: PageTransitionType.fade,
+                              ),
+                            },
+                          );
                         },
                         child: Card(
                           clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -192,38 +210,61 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 ),
                                 Text(
                                   'Clients',
-                                  style:
-                                      FlutterFlowTheme.of(context).titleLarge,
+                                  style: FlutterFlowTheme.of(context).bodySmall,
                                 ),
                               ],
                             ),
                           ),
                         ),
                       ),
-                      Card(
-                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                        elevation: 4.0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              10.0, 10.0, 10.0, 10.0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.calendar_month,
-                                color: FlutterFlowTheme.of(context).primary,
-                                size: 32.0,
+                      InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.pushNamed(
+                            'appointmentMonth',
+                            queryParameters: {
+                              'selectedDay': serializeParam(
+                                getCurrentTimestamp,
+                                ParamType.DateTime,
                               ),
-                              AutoSizeText(
-                                'Calendar',
-                                style: FlutterFlowTheme.of(context).titleLarge,
+                            }.withoutNulls,
+                            extra: <String, dynamic>{
+                              kTransitionInfoKey: TransitionInfo(
+                                hasTransition: true,
+                                transitionType: PageTransitionType.fade,
                               ),
-                            ],
+                            },
+                          );
+                        },
+                        child: Card(
+                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                          elevation: 4.0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                10.0, 10.0, 10.0, 10.0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.calendar_month,
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  size: 32.0,
+                                ),
+                                AutoSizeText(
+                                  'Calendar',
+                                  style: FlutterFlowTheme.of(context).bodySmall,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -248,7 +289,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                               ),
                               AutoSizeText(
                                 'Services',
-                                style: FlutterFlowTheme.of(context).titleLarge,
+                                style: FlutterFlowTheme.of(context).bodySmall,
                               ),
                             ],
                           ),
@@ -275,7 +316,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                               ),
                               AutoSizeText(
                                 'Products',
-                                style: FlutterFlowTheme.of(context).titleLarge,
+                                style: FlutterFlowTheme.of(context).bodySmall,
                               ),
                             ],
                           ),
@@ -302,7 +343,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                               ),
                               AutoSizeText(
                                 'Reviews',
-                                style: FlutterFlowTheme.of(context).titleLarge,
+                                style: FlutterFlowTheme.of(context).bodySmall,
                               ),
                             ],
                           ),
@@ -329,7 +370,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                               ),
                               Text(
                                 'Learn',
-                                style: FlutterFlowTheme.of(context).titleLarge,
+                                style: FlutterFlowTheme.of(context).bodySmall,
                               ),
                             ],
                           ),

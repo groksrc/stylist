@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
-import '../../auth/base_auth_user_provider.dart';
+import '/auth/base_auth_user_provider.dart';
 
 import '/index.dart';
 import '/main.dart';
@@ -118,10 +118,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => ClientAddWidget(),
             ),
             FFRoute(
-              name: 'Calendar',
-              path: 'calendar',
+              name: 'appointmentMonth',
+              path: 'appointmentMonth',
               requireAuth: true,
-              builder: (context, params) => CalendarWidget(),
+              builder: (context, params) => AppointmentMonthWidget(
+                selectedDay: params.getParam('selectedDay', ParamType.DateTime),
+              ),
             ),
             FFRoute(
               name: 'Onboarding2',
@@ -174,6 +176,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               path: 'clientAddContact',
               requireAuth: true,
               builder: (context, params) => ClientAddContactWidget(),
+            ),
+            FFRoute(
+              name: 'appointmentDay',
+              path: 'appointmentDay',
+              requireAuth: true,
+              builder: (context, params) => AppointmentDayWidget(
+                selectedDay: params.getParam('selectedDay', ParamType.DateTime),
+              ),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),

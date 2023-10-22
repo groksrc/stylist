@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'onboarding3_model.dart';
@@ -28,6 +29,7 @@ class _Onboarding3WidgetState extends State<Onboarding3Widget> {
     _model = createModel(context, () => Onboarding3Model());
 
     _model.phoneController ??= TextEditingController();
+    _model.phoneFocusNode ??= FocusNode();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -40,6 +42,15 @@ class _Onboarding3WidgetState extends State<Onboarding3Widget> {
 
   @override
   Widget build(BuildContext context) {
+    if (isiOS) {
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+          statusBarBrightness: Theme.of(context).brightness,
+          systemStatusBarContrastEnforced: true,
+        ),
+      );
+    }
+
     context.watch<FFAppState>();
 
     return Scaffold(
@@ -195,6 +206,7 @@ class _Onboarding3WidgetState extends State<Onboarding3Widget> {
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 32.0, 0.0, 16.0),
                 child: TextFormField(
                   controller: _model.phoneController,
+                  focusNode: _model.phoneFocusNode,
                   textCapitalization: TextCapitalization.words,
                   obscureText: false,
                   decoration: InputDecoration(

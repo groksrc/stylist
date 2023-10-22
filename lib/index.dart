@@ -5,7 +5,8 @@ export '/pages/onboarding/onboarding1/onboarding1_widget.dart'
 export '/home/home_widget.dart' show HomeWidget;
 export '/pages/clients/clients/clients_widget.dart' show ClientsWidget;
 export '/pages/clients/client_add/client_add_widget.dart' show ClientAddWidget;
-export '/pages/calendar/calendar_widget.dart' show CalendarWidget;
+export '/pages/appointments/appointment_month/appointment_month_widget.dart'
+    show AppointmentMonthWidget;
 export '/pages/onboarding/onboarding2/onboarding2_widget.dart'
     show Onboarding2Widget;
 export '/pages/onboarding/onboarding3/onboarding3_widget.dart'
@@ -21,3 +22,5 @@ export '/pages/clients/client_edit/client_edit_widget.dart'
     show ClientEditWidget;
 export '/pages/clients/client_add_contact/client_add_contact_widget.dart'
     show ClientAddContactWidget;
+export '/pages/appointments/appointment_day/appointment_day_widget.dart'
+    show AppointmentDayWidget;

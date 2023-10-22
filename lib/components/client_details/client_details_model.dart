@@ -10,6 +10,7 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'client_details_widget.dart' show ClientDetailsWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -26,15 +27,19 @@ class ClientDetailsModel extends FlutterFlowModel<ClientDetailsWidget> {
   String uploadedFileUrl = '';
 
   // State field(s) for firstName widget.
+  FocusNode? firstNameFocusNode;
   TextEditingController? firstNameController;
   String? Function(BuildContext, String?)? firstNameControllerValidator;
   // State field(s) for lastName widget.
+  FocusNode? lastNameFocusNode;
   TextEditingController? lastNameController;
   String? Function(BuildContext, String?)? lastNameControllerValidator;
   // State field(s) for phone widget.
+  FocusNode? phoneFocusNode;
   TextEditingController? phoneController;
   String? Function(BuildContext, String?)? phoneControllerValidator;
   // State field(s) for email widget.
+  FocusNode? emailFocusNode;
   TextEditingController? emailController;
   String? Function(BuildContext, String?)? emailControllerValidator;
   // State field(s) for birthMonth widget.
@@ -51,9 +56,16 @@ class ClientDetailsModel extends FlutterFlowModel<ClientDetailsWidget> {
   void initState(BuildContext context) {}
 
   void dispose() {
+    firstNameFocusNode?.dispose();
     firstNameController?.dispose();
+
+    lastNameFocusNode?.dispose();
     lastNameController?.dispose();
+
+    phoneFocusNode?.dispose();
     phoneController?.dispose();
+
+    emailFocusNode?.dispose();
     emailController?.dispose();
   }
 

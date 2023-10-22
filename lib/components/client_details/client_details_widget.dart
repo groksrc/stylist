@@ -9,6 +9,7 @@ import '/flutter_flow/upload_data.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'client_details_model.dart';
@@ -65,9 +66,13 @@ class _ClientDetailsWidgetState extends State<ClientDetailsWidget> {
 
     _model.firstNameController ??=
         TextEditingController(text: widget.firstName);
+    _model.firstNameFocusNode ??= FocusNode();
     _model.lastNameController ??= TextEditingController(text: widget.lastName);
+    _model.lastNameFocusNode ??= FocusNode();
     _model.phoneController ??= TextEditingController(text: widget.phone);
+    _model.phoneFocusNode ??= FocusNode();
     _model.emailController ??= TextEditingController(text: widget.email);
+    _model.emailFocusNode ??= FocusNode();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -333,6 +338,7 @@ class _ClientDetailsWidgetState extends State<ClientDetailsWidget> {
           padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
           child: TextFormField(
             controller: _model.firstNameController,
+            focusNode: _model.firstNameFocusNode,
             autofocus: true,
             obscureText: false,
             decoration: InputDecoration(
@@ -378,6 +384,7 @@ class _ClientDetailsWidgetState extends State<ClientDetailsWidget> {
           padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
           child: TextFormField(
             controller: _model.lastNameController,
+            focusNode: _model.lastNameFocusNode,
             autofocus: true,
             obscureText: false,
             decoration: InputDecoration(
@@ -423,6 +430,7 @@ class _ClientDetailsWidgetState extends State<ClientDetailsWidget> {
           padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
           child: TextFormField(
             controller: _model.phoneController,
+            focusNode: _model.phoneFocusNode,
             autofocus: true,
             obscureText: false,
             decoration: InputDecoration(
@@ -468,6 +476,7 @@ class _ClientDetailsWidgetState extends State<ClientDetailsWidget> {
           padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
           child: TextFormField(
             controller: _model.emailController,
+            focusNode: _model.emailFocusNode,
             autofocus: true,
             obscureText: false,
             decoration: InputDecoration(
