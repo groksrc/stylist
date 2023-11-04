@@ -113,7 +113,6 @@ class _AppointmentDayWidgetState extends State<AppointmentDayWidget> {
                   iconColor: FlutterFlowTheme.of(context).secondaryText,
                   weekFormat: true,
                   weekStartsMonday: false,
-                  initialDate: widget.selectedDay,
                   rowHeight: 64.0,
                   onChange: (DateTimeRange? newSelectedDate) {
                     setState(
@@ -121,7 +120,7 @@ class _AppointmentDayWidgetState extends State<AppointmentDayWidget> {
                   },
                   titleStyle: FlutterFlowTheme.of(context).headlineSmall,
                   dayOfWeekStyle:
-                      FlutterFlowTheme.of(context).labelMedium.override(
+                      FlutterFlowTheme.of(context).labelLarge.override(
                             fontFamily: 'Poppins',
                             lineHeight: 1.0,
                           ),
@@ -132,6 +131,29 @@ class _AppointmentDayWidgetState extends State<AppointmentDayWidget> {
                             color: FlutterFlowTheme.of(context).secondary,
                           ),
                   inactiveDateStyle: FlutterFlowTheme.of(context).labelMedium,
+                ),
+                Expanded(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      // Need to figure out how to expand to the full height of the column
+                      Expanded(
+                        child: Container(
+                          width: double.infinity,
+                          height: 650.0,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                          ),
+                          child: custom_widgets.DayViewWidget(
+                            width: MediaQuery.sizeOf(context).width * 1.0,
+                            height: MediaQuery.sizeOf(context).height * 1.0,
+                            onDateTap: () async {},
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 Row(
                   mainAxisSize: MainAxisSize.max,
@@ -162,11 +184,16 @@ class _AppointmentDayWidgetState extends State<AppointmentDayWidget> {
                               24.0, 0.0, 24.0, 0.0),
                           iconPadding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).primaryBackground,
-                          textStyle: FlutterFlowTheme.of(context).bodySmall,
+                          color: FlutterFlowTheme.of(context).primary,
+                          textStyle: FlutterFlowTheme.of(context)
+                              .bodySmall
+                              .override(
+                                fontFamily: 'Poppins',
+                                color: FlutterFlowTheme.of(context).secondary,
+                              ),
                           elevation: 0.0,
                           borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).alternate,
+                            color: FlutterFlowTheme.of(context).primary,
                             width: 1.0,
                           ),
                           borderRadius: BorderRadius.circular(0.0),
@@ -174,26 +201,6 @@ class _AppointmentDayWidgetState extends State<AppointmentDayWidget> {
                       ),
                     ),
                   ],
-                ),
-                SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      // Need to figure out how to expand to the full height of the column
-                      Container(
-                        width: double.infinity,
-                        height: 60.0,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                        ),
-                        child: custom_widgets.DayViewWidget(
-                          width: MediaQuery.sizeOf(context).width * 1.0,
-                          height: MediaQuery.sizeOf(context).height * 1.0,
-                        ),
-                      ),
-                    ],
-                  ),
                 ),
               ],
             ),

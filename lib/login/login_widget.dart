@@ -94,12 +94,16 @@ class _LoginWidgetState extends State<LoginWidget>
 
     _model.emailAddressController ??= TextEditingController();
     _model.emailAddressFocusNode ??= FocusNode();
+
     _model.passwordController ??= TextEditingController();
     _model.passwordFocusNode ??= FocusNode();
+
     _model.emailAddressCreateController ??= TextEditingController();
     _model.emailAddressCreateFocusNode ??= FocusNode();
+
     _model.passwordCreateController ??= TextEditingController();
     _model.passwordCreateFocusNode ??= FocusNode();
+
     _model.passwordConfirmController ??= TextEditingController();
     _model.passwordConfirmFocusNode ??= FocusNode();
 

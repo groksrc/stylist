@@ -31,8 +31,10 @@ class _Onboarding2WidgetState extends State<Onboarding2Widget> {
 
     _model.firstNameController ??= TextEditingController();
     _model.firstNameFocusNode ??= FocusNode();
+
     _model.lastNameController ??= TextEditingController();
     _model.lastNameFocusNode ??= FocusNode();
+
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 

@@ -30,6 +30,7 @@ class _Onboarding4WidgetState extends State<Onboarding4Widget> {
 
     _model.businessNameController ??= TextEditingController();
     _model.businessNameFocusNode ??= FocusNode();
+
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 

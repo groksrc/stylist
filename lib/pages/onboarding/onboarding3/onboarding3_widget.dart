@@ -30,6 +30,7 @@ class _Onboarding3WidgetState extends State<Onboarding3Widget> {
 
     _model.phoneController ??= TextEditingController();
     _model.phoneFocusNode ??= FocusNode();
+
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 

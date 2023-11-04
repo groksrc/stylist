@@ -40,6 +40,7 @@ class _SearchBartranslucentWidgetState
 
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
+
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -87,7 +88,8 @@ class _SearchBartranslucentWidgetState
                       safeSetState(() {
                         _model.simpleSearchResults = TextSearch(widget
                                 .searchItems!
-                                .map((str) => TextSearchItem(str, [str]))
+                                .map((str) =>
+                                    TextSearchItem.fromTerms(str, [str]))
                                 .toList())
                             .search(_model.textController.text)
                             .map((r) => r.object)

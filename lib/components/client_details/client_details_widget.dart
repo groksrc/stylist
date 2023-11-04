@@ -67,12 +67,16 @@ class _ClientDetailsWidgetState extends State<ClientDetailsWidget> {
     _model.firstNameController ??=
         TextEditingController(text: widget.firstName);
     _model.firstNameFocusNode ??= FocusNode();
+
     _model.lastNameController ??= TextEditingController(text: widget.lastName);
     _model.lastNameFocusNode ??= FocusNode();
+
     _model.phoneController ??= TextEditingController(text: widget.phone);
     _model.phoneFocusNode ??= FocusNode();
+
     _model.emailController ??= TextEditingController(text: widget.email);
     _model.emailFocusNode ??= FocusNode();
+
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -529,7 +533,8 @@ class _ClientDetailsWidgetState extends State<ClientDetailsWidget> {
                       FormFieldController<int>(
                     _model.birthMonthValue ??= widget.birthMonth,
                   ),
-                  options: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+                  options:
+                      List<int>.from([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
                   optionLabels: [
                     'January',
                     'February',
@@ -580,7 +585,8 @@ class _ClientDetailsWidgetState extends State<ClientDetailsWidget> {
                       FormFieldController<int>(
                     _model.birthDayValue ??= widget.birthDay,
                   ),
-                  options: functions.daysInMonth(_model.birthMonthValue!),
+                  options: List<int>.from(
+                      functions.daysInMonth(_model.birthMonthValue!)),
                   optionLabels: <String>[],
                   onChanged: (val) =>
                       setState(() => _model.birthDayValue = val),

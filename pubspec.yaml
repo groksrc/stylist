@@ -89,7 +89,7 @@ dependencies:
   supabase: 1.6.3
   supabase_flutter: 1.7.0
   table_calendar: 3.0.9
-  text_search: 0.0.2
+  text_search: 1.0.0
   timeago: 3.2.2
   universal_io: 2.2.2
   url_launcher: 6.1.10
@@ -117,7 +117,9 @@ dependency_overrides:
 
 dev_dependencies:
   flutter_launcher_icons: 0.13.1
+  flutter_lints: 3.0.0
   image: 4.0.17
+  lints: 3.0.0
 
   flutter_test:
     sdk: flutter

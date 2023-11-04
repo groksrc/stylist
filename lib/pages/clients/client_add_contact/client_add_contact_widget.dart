@@ -51,6 +51,7 @@ class _ClientAddContactWidgetState extends State<ClientAddContactWidget> {
 
     _model.searchController ??= TextEditingController();
     _model.searchFocusNode ??= FocusNode();
+
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -211,7 +212,7 @@ class _ClientAddContactWidgetState extends State<ClientAddContactWidget> {
                                                                   e.fullName)
                                                               .toList()
                                                               .map((str) =>
-                                                                  TextSearchItem(
+                                                                  TextSearchItem.fromTerms(
                                                                       str,
                                                                       [str]))
                                                               .toList())
