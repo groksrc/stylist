@@ -3,34 +3,30 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'appointment_month_model.dart';
-export 'appointment_month_model.dart';
+import 'appointment_day_v1_model.dart';
+export 'appointment_day_v1_model.dart';
 
-class AppointmentMonthWidget extends StatefulWidget {
-  const AppointmentMonthWidget({
-    Key? key,
-    required this.selectedDay,
-  }) : super(key: key);
-
-  final DateTime? selectedDay;
+class AppointmentDayV1Widget extends StatefulWidget {
+  const AppointmentDayV1Widget({Key? key}) : super(key: key);
 
   @override
-  _AppointmentMonthWidgetState createState() => _AppointmentMonthWidgetState();
+  _AppointmentDayV1WidgetState createState() => _AppointmentDayV1WidgetState();
 }
 
-class _AppointmentMonthWidgetState extends State<AppointmentMonthWidget> {
-  late AppointmentMonthModel _model;
+class _AppointmentDayV1WidgetState extends State<AppointmentDayV1Widget> {
+  late AppointmentDayV1Model _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => AppointmentMonthModel());
+    _model = createModel(context, () => AppointmentDayV1Model());
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -110,7 +106,7 @@ class _AppointmentMonthWidgetState extends State<AppointmentMonthWidget> {
                 FlutterFlowCalendar(
                   color: FlutterFlowTheme.of(context).primary,
                   iconColor: FlutterFlowTheme.of(context).secondaryText,
-                  weekFormat: false,
+                  weekFormat: true,
                   weekStartsMonday: false,
                   rowHeight: 64.0,
                   onChange: (DateTimeRange? newSelectedDate) {
@@ -119,7 +115,7 @@ class _AppointmentMonthWidgetState extends State<AppointmentMonthWidget> {
                   },
                   titleStyle: FlutterFlowTheme.of(context).headlineSmall,
                   dayOfWeekStyle:
-                      FlutterFlowTheme.of(context).labelMedium.override(
+                      FlutterFlowTheme.of(context).labelLarge.override(
                             fontFamily: 'Poppins',
                             lineHeight: 1.0,
                           ),
@@ -131,31 +127,70 @@ class _AppointmentMonthWidgetState extends State<AppointmentMonthWidget> {
                           ),
                   inactiveDateStyle: FlutterFlowTheme.of(context).labelMedium,
                 ),
+                Expanded(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      // Need to figure out how to expand to the full height of the column
+                      Expanded(
+                        child: Container(
+                          width: double.infinity,
+                          height: 650.0,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                          ),
+                          child: custom_widgets.DayViewWidget(
+                            width: MediaQuery.sizeOf(context).width * 1.0,
+                            height: MediaQuery.sizeOf(context).height * 1.0,
+                            selectedDay: FFAppState().dayViewSelectedDay,
+                            onDateTap: () async {},
+                            onPageChange: () async {},
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Expanded(
                       child: FFButtonWidget(
                         onPressed: () async {
-                          setState(() {
-                            FFAppState().dayViewSelectedDay =
-                                _model.calendarSelectedDay?.start;
-                          });
-
-                          context.pushNamed('appointmentDay');
+                          context.pushNamed(
+                            'appointmentMonth',
+                            queryParameters: {
+                              'selectedDay': serializeParam(
+                                _model.calendarSelectedDay?.start,
+                                ParamType.DateTime,
+                              ),
+                            }.withoutNulls,
+                            extra: <String, dynamic>{
+                              kTransitionInfoKey: TransitionInfo(
+                                hasTransition: true,
+                                transitionType: PageTransitionType.fade,
+                              ),
+                            },
+                          );
                         },
-                        text: 'Open This Day',
+                        text: 'Show Full Month',
                         options: FFButtonOptions(
                           height: 40.0,
                           padding: EdgeInsetsDirectional.fromSTEB(
                               24.0, 0.0, 24.0, 0.0),
                           iconPadding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).primaryBackground,
-                          textStyle: FlutterFlowTheme.of(context).bodySmall,
+                          color: FlutterFlowTheme.of(context).primary,
+                          textStyle: FlutterFlowTheme.of(context)
+                              .bodySmall
+                              .override(
+                                fontFamily: 'Poppins',
+                                color: FlutterFlowTheme.of(context).secondary,
+                              ),
                           elevation: 0.0,
                           borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).alternate,
+                            color: FlutterFlowTheme.of(context).primary,
                             width: 1.0,
                           ),
                           borderRadius: BorderRadius.circular(0.0),

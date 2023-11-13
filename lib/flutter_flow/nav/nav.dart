@@ -6,6 +6,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
+
 import '/backend/supabase/supabase.dart';
 import '/auth/base_auth_user_provider.dart';
 
@@ -181,9 +182,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'appointmentDay',
               path: 'appointmentDay',
               requireAuth: true,
-              builder: (context, params) => AppointmentDayWidget(
-                selectedDay: params.getParam('selectedDay', ParamType.DateTime),
-              ),
+              builder: (context, params) => AppointmentDayWidget(),
+            ),
+            FFRoute(
+              name: 'appointmentDayV1',
+              path: 'appointmentDayV1',
+              requireAuth: true,
+              builder: (context, params) => AppointmentDayV1Widget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),

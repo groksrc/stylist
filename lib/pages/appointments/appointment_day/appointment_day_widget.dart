@@ -1,4 +1,3 @@
-import '/flutter_flow/flutter_flow_calendar.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -12,12 +11,7 @@ import 'appointment_day_model.dart';
 export 'appointment_day_model.dart';
 
 class AppointmentDayWidget extends StatefulWidget {
-  const AppointmentDayWidget({
-    Key? key,
-    required this.selectedDay,
-  }) : super(key: key);
-
-  final DateTime? selectedDay;
+  const AppointmentDayWidget({Key? key}) : super(key: key);
 
   @override
   _AppointmentDayWidgetState createState() => _AppointmentDayWidgetState();
@@ -108,34 +102,48 @@ class _AppointmentDayWidgetState extends State<AppointmentDayWidget> {
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                FlutterFlowCalendar(
-                  color: FlutterFlowTheme.of(context).primary,
-                  iconColor: FlutterFlowTheme.of(context).secondaryText,
-                  weekFormat: true,
-                  weekStartsMonday: false,
-                  rowHeight: 64.0,
-                  onChange: (DateTimeRange? newSelectedDate) {
-                    setState(
-                        () => _model.calendarSelectedDay = newSelectedDate);
-                  },
-                  titleStyle: FlutterFlowTheme.of(context).headlineSmall,
-                  dayOfWeekStyle:
-                      FlutterFlowTheme.of(context).labelLarge.override(
-                            fontFamily: 'Poppins',
-                            lineHeight: 1.0,
-                          ),
-                  dateStyle: FlutterFlowTheme.of(context).bodyMedium,
-                  selectedDateStyle:
-                      FlutterFlowTheme.of(context).titleSmall.override(
-                            fontFamily: 'Poppins',
-                            color: FlutterFlowTheme.of(context).secondary,
-                          ),
-                  inactiveDateStyle: FlutterFlowTheme.of(context).labelMedium,
-                ),
                 Expanded(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            10.0, 10.0, 10.0, 0.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              dateTimeFormat(
+                                  'MMMM y', FFAppState().dayViewSelectedDay),
+                              style: FlutterFlowTheme.of(context)
+                                  .titleLarge
+                                  .override(
+                                    fontFamily: 'Oswald',
+                                    fontSize: 28.0,
+                                  ),
+                            ),
+                            FlutterFlowIconButton(
+                              borderRadius: 20.0,
+                              borderWidth: 1.0,
+                              buttonSize: 40.0,
+                              icon: Icon(
+                                Icons.calendar_today_rounded,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                size: 24.0,
+                              ),
+                              onPressed: () async {
+                                setState(() {
+                                  FFAppState().dayViewSelectedDay =
+                                      getCurrentTimestamp;
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+
                       // Need to figure out how to expand to the full height of the column
                       Expanded(
                         child: Container(
@@ -145,10 +153,33 @@ class _AppointmentDayWidgetState extends State<AppointmentDayWidget> {
                             color: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
                           ),
-                          child: custom_widgets.DayViewWidget(
-                            width: MediaQuery.sizeOf(context).width * 1.0,
-                            height: MediaQuery.sizeOf(context).height * 1.0,
-                            onDateTap: () async {},
+                          child: Container(
+                            width: double.infinity,
+                            height: double.infinity,
+                            child: custom_widgets.DayViewWrapperWidget(
+                              width: double.infinity,
+                              height: double.infinity,
+                              selectedDay: FFAppState().dayViewSelectedDay,
+                              onDateTap: () async {
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      content: Text(FFAppState()
+                                          .dayViewTappedDate!
+                                          .toString()),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: Text('Ok'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                            ),
                           ),
                         ),
                       ),
@@ -165,19 +196,13 @@ class _AppointmentDayWidgetState extends State<AppointmentDayWidget> {
                             'appointmentMonth',
                             queryParameters: {
                               'selectedDay': serializeParam(
-                                _model.calendarSelectedDay?.start,
+                                FFAppState().dayViewSelectedDay,
                                 ParamType.DateTime,
                               ),
                             }.withoutNulls,
-                            extra: <String, dynamic>{
-                              kTransitionInfoKey: TransitionInfo(
-                                hasTransition: true,
-                                transitionType: PageTransitionType.fade,
-                              ),
-                            },
                           );
                         },
-                        text: 'Show Full Month',
+                        text: 'Month View',
                         options: FFButtonOptions(
                           height: 40.0,
                           padding: EdgeInsetsDirectional.fromSTEB(

@@ -52,6 +52,18 @@ class FFAppState extends ChangeNotifier {
     _contactsPermissionGranted = _value;
     prefs.setBool('ff_contactsPermissionGranted', _value);
   }
+
+  DateTime? _dayViewSelectedDay;
+  DateTime? get dayViewSelectedDay => _dayViewSelectedDay;
+  set dayViewSelectedDay(DateTime? _value) {
+    _dayViewSelectedDay = _value;
+  }
+
+  DateTime? _dayViewTappedDate;
+  DateTime? get dayViewTappedDate => _dayViewTappedDate;
+  set dayViewTappedDate(DateTime? _value) {
+    _dayViewTappedDate = _value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

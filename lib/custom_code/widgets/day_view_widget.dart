@@ -11,19 +11,25 @@ import 'package:flutter/material.dart';
 // Begin custom widget code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-import 'index.dart'; // Imports other custom widgets
-
 import 'package:calendar_view/calendar_view.dart';
 
 class DayViewWidget extends StatefulWidget {
   const DayViewWidget(
-      {Key? key, this.width, this.height, this.dateTitleFormat, this.onDateTap})
+      {Key? key,
+      this.width,
+      this.height,
+      this.dateTitleFormat,
+      this.onDateTap,
+      this.onPageChange,
+      this.selectedDay})
       : super(key: key);
 
   final double? width;
   final double? height;
   final String? dateTitleFormat;
   final Future<dynamic> Function()? onDateTap;
+  final Future<dynamic> Function()? onPageChange;
+  final DateTime? selectedDay;
 
   @override
   _DayViewWidgetState createState() => _DayViewWidgetState();
@@ -32,12 +38,19 @@ class DayViewWidget extends StatefulWidget {
 class _DayViewWidgetState extends State<DayViewWidget> {
   // Create an EventController instance
   final EventController _eventController = EventController();
+  late DateTime _selectedDay;
 
   StringProvider dateStringProvider() {
     final format = widget.dateTitleFormat ?? 'MM/dd/yyyy';
     return (DateTime date, {DateTime? secondaryDate}) {
       return DateFormat(format).format(date);
     };
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedDay = widget.selectedDay ?? DateTime.now();
   }
 
   @override
@@ -50,7 +63,21 @@ class _DayViewWidgetState extends State<DayViewWidget> {
             dayTitleBuilder: (date) => SizedBox.shrink(),
             minDay: DateTime(2020, 1, 1),
             maxDay: DateTime(2050, 1, 1),
-            onDateTap: widget.onDateTap,
+            initialDay: _selectedDay,
+            onDateTap: (date) {
+              setState(() {
+                _selectedDay = date;
+              });
+              // FFAppState().selectedDay = date;
+              widget.onDateTap!();
+            },
+            onPageChange: (date, page) {
+              setState(() {
+                _selectedDay = date;
+              });
+              // FFAppState().selectedDay = date;
+              widget.onPageChange!();
+            },
             startDuration: Duration(hours: 9),
             timeLineBuilder: (date) {
               return Padding(
