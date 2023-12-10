@@ -267,9 +267,12 @@ class _Onboarding1WidgetState extends State<Onboarding1Widget>
                       decoration: BoxDecoration(
                         color: Colors.white,
                       ),
-                      child: MasonryGridView.count(
+                      child: MasonryGridView.builder(
                         physics: const NeverScrollableScrollPhysics(),
-                        crossAxisCount: 3,
+                        gridDelegate:
+                            SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                        ),
                         crossAxisSpacing: 10.0,
                         mainAxisSpacing: 10.0,
                         itemCount: 11,

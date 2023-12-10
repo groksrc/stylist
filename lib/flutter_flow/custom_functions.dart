@@ -32,3 +32,8 @@ List<int> daysInMonth(int month) {
 List<ContactStruct> emptyContactList() {
   return [];
 }
+
+DateTime today() {
+  final now = DateTime.now();
+  return new DateTime(now.year, now.month, now.day);
+}

@@ -19,15 +19,17 @@ class DayViewWrapperWidget extends StatefulWidget {
       this.width,
       this.height,
       this.dateTitleFormat,
-      this.onDateTap,
-      this.selectedDay})
+      required this.onDateTap,
+      required this.onPageChange,
+      required this.selectedDay})
       : super(key: key);
 
   final double? width;
   final double? height;
   final String? dateTitleFormat;
-  final Future<dynamic> Function()? onDateTap;
-  final DateTime? selectedDay;
+  final Future<dynamic> Function() onDateTap;
+  final Future<dynamic> Function() onPageChange;
+  final DateTime selectedDay;
 
   @override
   _DayViewWrapperWidgetState createState() => _DayViewWrapperWidgetState();
@@ -48,8 +50,7 @@ class _DayViewWrapperWidgetState extends State<DayViewWrapperWidget> {
   @override
   void initState() {
     super.initState();
-    _selectedDay =
-        widget.selectedDay ?? DateTime.now(); // Initialize with selectedDay
+    _selectedDay = widget.selectedDay;
 
     // Calculate the start duration
     DateTime now = DateTime.now();
@@ -59,24 +60,6 @@ class _DayViewWrapperWidgetState extends State<DayViewWrapperWidget> {
     } else {
       _startDuration = Duration(hours: 9); // Default start time
     }
-
-    FFAppState().addListener(_onStateChanged);
-  }
-
-  void _onStateChanged() {
-    // Update the widget when the selectedDay changes
-    if (_selectedDay != FFAppState().dayViewSelectedDay) {
-      setState(() {
-        _selectedDay = FFAppState().dayViewSelectedDay ?? DateTime.now();
-      });
-    }
-  }
-
-  @override
-  void dispose() {
-    // Remove the listener when the widget is disposed
-    FFAppState().removeListener(_onStateChanged);
-    super.dispose();
   }
 
   @override
@@ -99,13 +82,16 @@ class _DayViewWrapperWidgetState extends State<DayViewWrapperWidget> {
             ),
             heightPerMinute: 1.3,
             initialDay: _selectedDay,
-            minuteSlotSize: MinuteSlotSize.minutes15,
+            minuteSlotSize: MinuteSlotSize.minutes30,
             onDateTap: (date) {
-              setState(() {
-                _tappedDate = date;
-              });
+              widget.onDateTap();
               FFAppState().dayViewTappedDate = date;
-              widget.onDateTap!();
+              setState(() => _tappedDate = date);
+            },
+            onPageChange: (date, page) {
+              widget.onPageChange();
+              FFAppState().dayViewSelectedDay = date;
+              setState(() => _selectedDay = date);
             },
             showHalfHours: true,
             startDuration: _startDuration,

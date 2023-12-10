@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -136,7 +137,7 @@ class _AppointmentDayWidgetState extends State<AppointmentDayWidget> {
                               onPressed: () async {
                                 setState(() {
                                   FFAppState().dayViewSelectedDay =
-                                      getCurrentTimestamp;
+                                      functions.today();
                                 });
                               },
                             ),
@@ -148,7 +149,7 @@ class _AppointmentDayWidgetState extends State<AppointmentDayWidget> {
                       Expanded(
                         child: Container(
                           width: double.infinity,
-                          height: 650.0,
+                          height: double.infinity,
                           decoration: BoxDecoration(
                             color: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
@@ -156,35 +157,64 @@ class _AppointmentDayWidgetState extends State<AppointmentDayWidget> {
                           child: Container(
                             width: double.infinity,
                             height: double.infinity,
-                            child: custom_widgets.DayViewWrapperWidget(
+                            child: custom_widgets.MyCalendarWidget(
                               width: double.infinity,
                               height: double.infinity,
-                              selectedDay: FFAppState().dayViewSelectedDay,
-                              onDateTap: () async {
-                                await showDialog(
-                                  context: context,
-                                  builder: (alertDialogContext) {
-                                    return AlertDialog(
-                                      content: Text(FFAppState()
-                                          .dayViewTappedDate!
-                                          .toString()),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () =>
-                                              Navigator.pop(alertDialogContext),
-                                          child: Text('Ok'),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
-                              },
                             ),
                           ),
                         ),
                       ),
                     ],
                   ),
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                      child: FFButtonWidget(
+                        onPressed: () async {
+                          await showDialog(
+                            context: context,
+                            builder: (alertDialogContext) {
+                              return AlertDialog(
+                                content: Text(FFAppState()
+                                    .dayViewSelectedDay!
+                                    .toString()),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(alertDialogContext),
+                                    child: Text('Ok'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
+                        text: 'What Day Is It',
+                        options: FFButtonOptions(
+                          height: 40.0,
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              24.0, 0.0, 24.0, 0.0),
+                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
+                          color: FlutterFlowTheme.of(context).primary,
+                          textStyle: FlutterFlowTheme.of(context)
+                              .bodySmall
+                              .override(
+                                fontFamily: 'Poppins',
+                                color: FlutterFlowTheme.of(context).secondary,
+                              ),
+                          elevation: 0.0,
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).primary,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(0.0),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 Row(
                   mainAxisSize: MainAxisSize.max,
