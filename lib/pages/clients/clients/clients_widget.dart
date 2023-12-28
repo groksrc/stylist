@@ -233,253 +233,232 @@ class _ClientsWidgetState extends State<ClientsWidget> {
         ),
         body: SafeArea(
           top: true,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  4.0, 0.0, 4.0, 0.0),
-                              child: wrapWithModel(
-                                model: _model.searchBartranslucentModel,
-                                updateCallback: () => setState(() {}),
-                                child: SearchBartranslucentWidget(
-                                  searchItems: [],
+          child: Padding(
+            padding: EdgeInsets.all(10.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(4.0, 0.0, 4.0, 0.0),
+                        child: wrapWithModel(
+                          model: _model.searchBartranslucentModel,
+                          updateCallback: () => setState(() {}),
+                          child: SearchBartranslucentWidget(
+                            searchItems: [],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Expanded(
+                  child: Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                    child: FutureBuilder<List<ClientsRow>>(
+                      future: (_model.requestCompleter ??=
+                              Completer<List<ClientsRow>>()
+                                ..complete(ClientsTable().queryRows(
+                                  queryFn: (q) => q
+                                      .eq(
+                                        'stylist_id',
+                                        currentUserUid,
+                                      )
+                                      .eq(
+                                        'archived',
+                                        false,
+                                      )
+                                      .order('first_name', ascending: true),
+                                )))
+                          .future,
+                      builder: (context, snapshot) {
+                        // Customize what your widget looks like when it's loading.
+                        if (!snapshot.hasData) {
+                          return Center(
+                            child: SizedBox(
+                              width: 50.0,
+                              height: 50.0,
+                              child: CircularProgressIndicator(
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  FlutterFlowTheme.of(context).primary,
                                 ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 10.0, 0.0, 0.0),
-                          child: FutureBuilder<List<ClientsRow>>(
-                            future: (_model.requestCompleter ??= Completer<
-                                    List<ClientsRow>>()
-                                  ..complete(ClientsTable().queryRows(
-                                    queryFn: (q) => q
-                                        .eq(
-                                          'stylist_id',
-                                          currentUserUid,
-                                        )
-                                        .eq(
-                                          'archived',
-                                          false,
-                                        )
-                                        .order('first_name', ascending: true),
-                                  )))
-                                .future,
-                            builder: (context, snapshot) {
-                              // Customize what your widget looks like when it's loading.
-                              if (!snapshot.hasData) {
-                                return Center(
-                                  child: SizedBox(
-                                    width: 50.0,
-                                    height: 50.0,
-                                    child: CircularProgressIndicator(
-                                      valueColor: AlwaysStoppedAnimation<Color>(
-                                        FlutterFlowTheme.of(context).primary,
+                          );
+                        }
+                        List<ClientsRow> listViewClientsRowList =
+                            snapshot.data!;
+                        return RefreshIndicator(
+                          onRefresh: () async {
+                            setState(() => _model.requestCompleter = null);
+                            await _model.waitForRequestCompleted();
+                          },
+                          child: ListView.builder(
+                            padding: EdgeInsets.zero,
+                            scrollDirection: Axis.vertical,
+                            itemCount: listViewClientsRowList.length,
+                            itemBuilder: (context, listViewIndex) {
+                              final listViewClientsRow =
+                                  listViewClientsRowList[listViewIndex];
+                              return InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  context.pushNamed(
+                                    'client',
+                                    queryParameters: {
+                                      'clientId': serializeParam(
+                                        listViewClientsRow.id,
+                                        ParamType.String,
                                       ),
-                                    ),
-                                  ),
-                                );
-                              }
-                              List<ClientsRow> listViewClientsRowList =
-                                  snapshot.data!;
-                              return RefreshIndicator(
-                                onRefresh: () async {
-                                  setState(
-                                      () => _model.requestCompleter = null);
-                                  await _model.waitForRequestCompleted();
+                                    }.withoutNulls,
+                                    extra: <String, dynamic>{
+                                      kTransitionInfoKey: TransitionInfo(
+                                        hasTransition: true,
+                                        transitionType: PageTransitionType.fade,
+                                      ),
+                                    },
+                                  );
                                 },
-                                child: ListView.builder(
-                                  padding: EdgeInsets.zero,
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.vertical,
-                                  itemCount: listViewClientsRowList.length,
-                                  itemBuilder: (context, listViewIndex) {
-                                    final listViewClientsRow =
-                                        listViewClientsRowList[listViewIndex];
-                                    return InkWell(
-                                      splashColor: Colors.transparent,
-                                      focusColor: Colors.transparent,
-                                      hoverColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () async {
-                                        context.pushNamed(
-                                          'client',
-                                          queryParameters: {
-                                            'clientId': serializeParam(
-                                              listViewClientsRow.id,
-                                              ParamType.String,
+                                child: Card(
+                                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  elevation: 2.0,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsets.all(20.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Container(
+                                          width: 80.0,
+                                          height: 80.0,
+                                          clipBehavior: Clip.antiAlias,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: Image.network(
+                                            valueOrDefault<String>(
+                                              listViewClientsRow.clientPhoto,
+                                              'https://images.unsplash.com/photo-1554519515-242161756769?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=60',
                                             ),
-                                          }.withoutNulls,
-                                          extra: <String, dynamic>{
-                                            kTransitionInfoKey: TransitionInfo(
-                                              hasTransition: true,
-                                              transitionType:
-                                                  PageTransitionType.fade,
-                                            ),
-                                          },
-                                        );
-                                      },
-                                      child: Card(
-                                        clipBehavior:
-                                            Clip.antiAliasWithSaveLayer,
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        elevation: 2.0,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  20.0, 20.0, 20.0, 20.0),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Container(
-                                                width: 80.0,
-                                                height: 80.0,
-                                                clipBehavior: Clip.antiAlias,
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                ),
-                                                child: Image.network(
-                                                  valueOrDefault<String>(
-                                                    listViewClientsRow
-                                                        .clientPhoto,
-                                                    'https://images.unsplash.com/photo-1554519515-242161756769?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=60',
-                                                  ),
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                              Flexible(
-                                                child: Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          10.0, 0.0, 0.0, 0.0),
-                                                  child: Row(
+                                        Flexible(
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    10.0, 0.0, 0.0, 0.0),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Flexible(
+                                                  child: Column(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: [
-                                                      Flexible(
-                                                        child: Column(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Wrap(
-                                                              spacing: 5.0,
-                                                              runSpacing: 0.0,
-                                                              alignment:
-                                                                  WrapAlignment
-                                                                      .start,
-                                                              crossAxisAlignment:
-                                                                  WrapCrossAlignment
-                                                                      .start,
-                                                              direction: Axis
-                                                                  .horizontal,
-                                                              runAlignment:
-                                                                  WrapAlignment
-                                                                      .start,
-                                                              verticalDirection:
-                                                                  VerticalDirection
-                                                                      .down,
-                                                              clipBehavior:
-                                                                  Clip.none,
-                                                              children: [
-                                                                Text(
-                                                                  listViewClientsRow
-                                                                      .firstName!,
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .headlineMedium,
-                                                                ),
-                                                                Text(
-                                                                  listViewClientsRow
-                                                                      .lastName!,
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .headlineMedium,
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          10.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                              child: Text(
-                                                                valueOrDefault<
-                                                                    String>(
-                                                                  listViewClientsRow
-                                                                      .phone,
-                                                                  '---',
-                                                                ),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyLarge,
-                                                              ),
-                                                            ),
-                                                          ],
+                                                      Wrap(
+                                                        spacing: 5.0,
+                                                        runSpacing: 0.0,
+                                                        alignment:
+                                                            WrapAlignment.start,
+                                                        crossAxisAlignment:
+                                                            WrapCrossAlignment
+                                                                .start,
+                                                        direction:
+                                                            Axis.horizontal,
+                                                        runAlignment:
+                                                            WrapAlignment.start,
+                                                        verticalDirection:
+                                                            VerticalDirection
+                                                                .down,
+                                                        clipBehavior: Clip.none,
+                                                        children: [
+                                                          Text(
+                                                            listViewClientsRow
+                                                                .firstName!,
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .headlineMedium,
+                                                          ),
+                                                          Text(
+                                                            listViewClientsRow
+                                                                .lastName!,
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .headlineMedium,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    10.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        child: Text(
+                                                          valueOrDefault<
+                                                              String>(
+                                                            listViewClientsRow
+                                                                .phone,
+                                                            '---',
+                                                          ),
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyLarge,
                                                         ),
                                                       ),
                                                     ],
                                                   ),
                                                 ),
-                                              ),
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Icon(
-                                                    Icons.chevron_right_rounded,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryText,
-                                                    size: 24.0,
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    );
-                                  },
+                                        Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Icon(
+                                              Icons.chevron_right_rounded,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              size: 24.0,
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ),
                               );
                             },
                           ),
-                        ),
-                      ),
-                    ],
+                        );
+                      },
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

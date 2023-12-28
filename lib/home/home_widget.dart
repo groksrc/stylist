@@ -160,8 +160,7 @@ class _HomeWidgetState extends State<HomeWidget> {
             children: [
               Expanded(
                 child: Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 20.0),
+                  padding: EdgeInsets.all(20.0),
                   child: GridView(
                     padding: EdgeInsets.zero,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -197,8 +196,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                10.0, 10.0, 10.0, 10.0),
+                            padding: EdgeInsets.all(10.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -248,8 +246,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                10.0, 10.0, 10.0, 10.0),
+                            padding: EdgeInsets.all(10.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -276,8 +273,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              10.0, 10.0, 10.0, 10.0),
+                          padding: EdgeInsets.all(10.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -303,8 +299,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              10.0, 10.0, 10.0, 10.0),
+                          padding: EdgeInsets.all(10.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -330,8 +325,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              10.0, 10.0, 10.0, 10.0),
+                          padding: EdgeInsets.all(10.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -357,8 +351,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              10.0, 10.0, 10.0, 10.0),
+                          padding: EdgeInsets.all(10.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.center,

@@ -150,7 +150,7 @@ class _LoginWidgetState extends State<LoginWidget>
                   decoration: BoxDecoration(
                     color: Colors.white,
                   ),
-                  alignment: AlignmentDirectional(0.00, -1.00),
+                  alignment: AlignmentDirectional(0.0, -1.0),
                   child: SingleChildScrollView(
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
@@ -170,7 +170,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                 topRight: Radius.circular(0.0),
                               ),
                             ),
-                            alignment: AlignmentDirectional(-1.00, 0.00),
+                            alignment: AlignmentDirectional(-1.0, 0.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -196,8 +196,7 @@ class _LoginWidgetState extends State<LoginWidget>
                             color: Colors.white,
                           ),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                4.0, 4.0, 4.0, 4.0),
+                            padding: EdgeInsets.all(4.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -275,10 +274,9 @@ class _LoginWidgetState extends State<LoginWidget>
                                 ),
                                 if (_model.create == false)
                                   Align(
-                                    alignment: AlignmentDirectional(0.00, 0.00),
+                                    alignment: AlignmentDirectional(0.0, 0.0),
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          12.0, 12.0, 12.0, 12.0),
+                                      padding: EdgeInsets.all(12.0),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         crossAxisAlignment:
@@ -369,9 +367,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                   filled: true,
                                                   fillColor: Colors.white,
                                                   contentPadding:
-                                                      EdgeInsetsDirectional
-                                                          .fromSTEB(24.0, 24.0,
-                                                              24.0, 24.0),
+                                                      EdgeInsets.all(24.0),
                                                 ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
@@ -458,9 +454,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                   filled: true,
                                                   fillColor: Colors.white,
                                                   contentPadding:
-                                                      EdgeInsetsDirectional
-                                                          .fromSTEB(24.0, 24.0,
-                                                              24.0, 24.0),
+                                                      EdgeInsets.all(24.0),
                                                   suffixIcon: InkWell(
                                                     onTap: () => setState(
                                                       () => _model
@@ -491,8 +485,8 @@ class _LoginWidgetState extends State<LoginWidget>
                                             ),
                                           ),
                                           Align(
-                                            alignment: AlignmentDirectional(
-                                                0.00, 0.00),
+                                            alignment:
+                                                AlignmentDirectional(0.0, 0.0),
                                             child: Padding(
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(
@@ -555,8 +549,8 @@ class _LoginWidgetState extends State<LoginWidget>
                                             ),
                                           ),
                                           Align(
-                                            alignment: AlignmentDirectional(
-                                                0.00, 0.00),
+                                            alignment:
+                                                AlignmentDirectional(0.0, 0.0),
                                             child: Padding(
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(
@@ -600,10 +594,9 @@ class _LoginWidgetState extends State<LoginWidget>
                                   ),
                                 if (_model.create == true)
                                   Align(
-                                    alignment: AlignmentDirectional(0.00, 0.00),
+                                    alignment: AlignmentDirectional(0.0, 0.0),
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          12.0, 12.0, 12.0, 12.0),
+                                      padding: EdgeInsets.all(12.0),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         crossAxisAlignment:
@@ -696,9 +689,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                   filled: true,
                                                   fillColor: Colors.white,
                                                   contentPadding:
-                                                      EdgeInsetsDirectional
-                                                          .fromSTEB(24.0, 24.0,
-                                                              24.0, 24.0),
+                                                      EdgeInsets.all(24.0),
                                                 ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
@@ -796,9 +787,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                   filled: true,
                                                   fillColor: Colors.white,
                                                   contentPadding:
-                                                      EdgeInsetsDirectional
-                                                          .fromSTEB(24.0, 24.0,
-                                                              24.0, 24.0),
+                                                      EdgeInsets.all(24.0),
                                                   suffixIcon: InkWell(
                                                     onTap: () => setState(
                                                       () => _model
@@ -913,9 +902,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                   filled: true,
                                                   fillColor: Colors.white,
                                                   contentPadding:
-                                                      EdgeInsetsDirectional
-                                                          .fromSTEB(24.0, 24.0,
-                                                              24.0, 24.0),
+                                                      EdgeInsets.all(24.0),
                                                   suffixIcon: InkWell(
                                                     onTap: () => setState(
                                                       () => _model
@@ -956,8 +943,8 @@ class _LoginWidgetState extends State<LoginWidget>
                                             ),
                                           ),
                                           Align(
-                                            alignment: AlignmentDirectional(
-                                                0.00, 0.00),
+                                            alignment:
+                                                AlignmentDirectional(0.0, 0.0),
                                             child: Padding(
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(

@@ -71,7 +71,7 @@ class ContactStruct extends FFFirebaseStruct {
       );
 
   static ContactStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic> ? ContactStruct.fromMap(data) : null;
+      data is Map ? ContactStruct.fromMap(data.cast<String, dynamic>()) : null;
 
   Map<String, dynamic> toMap() => {
         'id': _id,

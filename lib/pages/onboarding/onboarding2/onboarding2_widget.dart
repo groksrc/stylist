@@ -396,7 +396,7 @@ class _Onboarding2WidgetState extends State<Onboarding2Widget> {
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(0.00, 0.05),
+                alignment: AlignmentDirectional(0.0, 0.05),
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
                   child: FFButtonWidget(

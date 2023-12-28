@@ -189,6 +189,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               path: 'appointmentDayV1',
               requireAuth: true,
               builder: (context, params) => AppointmentDayV1Widget(),
+            ),
+            FFRoute(
+              name: 'appointmentDayV2',
+              path: 'appointmentDayV2',
+              requireAuth: true,
+              builder: (context, params) => AppointmentDayV2Widget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
@@ -385,13 +391,20 @@ class FFRoute {
                   key: state.pageKey,
                   child: child,
                   transitionDuration: transitionInfo.duration,
-                  transitionsBuilder: PageTransition(
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) =>
+                          PageTransition(
                     type: transitionInfo.transitionType,
                     duration: transitionInfo.duration,
                     reverseDuration: transitionInfo.duration,
                     alignment: transitionInfo.alignment,
                     child: child,
-                  ).transitionsBuilder,
+                  ).buildTransitions(
+                    context,
+                    animation,
+                    secondaryAnimation,
+                    child,
+                  ),
                 )
               : MaterialPage(key: state.pageKey, child: child);
         },

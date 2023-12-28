@@ -156,7 +156,7 @@ class _ClientAddContactWidgetState extends State<ClientAddContactWidget> {
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                Expanded(
+                Flexible(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -165,8 +165,7 @@ class _ClientAddContactWidgetState extends State<ClientAddContactWidget> {
                         children: [
                           Expanded(
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  5.0, 5.0, 5.0, 5.0),
+                              padding: EdgeInsets.all(5.0),
                               child: Container(
                                 width: double.infinity,
                                 height: 60.0,
@@ -298,227 +297,235 @@ class _ClientAddContactWidgetState extends State<ClientAddContactWidget> {
                       ),
                       if (_model.searchController.text == null ||
                           _model.searchController.text == '')
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 10.0, 0.0, 0.0),
-                          child: Builder(
-                            builder: (context) {
-                              final contact = _model.deviceContacts.toList();
-                              return ListView.builder(
-                                padding: EdgeInsets.zero,
-                                shrinkWrap: true,
-                                scrollDirection: Axis.vertical,
-                                itemCount: contact.length,
-                                itemBuilder: (context, contactIndex) {
-                                  final contactItem = contact[contactIndex];
-                                  return Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        5.0, 5.0, 5.0, 5.0),
-                                    child: Theme(
-                                      data: ThemeData(
-                                        checkboxTheme: CheckboxThemeData(
-                                          visualDensity: VisualDensity.standard,
-                                          materialTapTargetSize:
-                                              MaterialTapTargetSize.padded,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(25),
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 10.0, 0.0, 0.0),
+                            child: Builder(
+                              builder: (context) {
+                                final contact = _model.deviceContacts.toList();
+                                return ListView.builder(
+                                  padding: EdgeInsets.zero,
+                                  scrollDirection: Axis.vertical,
+                                  itemCount: contact.length,
+                                  itemBuilder: (context, contactIndex) {
+                                    final contactItem = contact[contactIndex];
+                                    return Padding(
+                                      padding: EdgeInsets.all(5.0),
+                                      child: Theme(
+                                        data: ThemeData(
+                                          checkboxTheme: CheckboxThemeData(
+                                            visualDensity:
+                                                VisualDensity.standard,
+                                            materialTapTargetSize:
+                                                MaterialTapTargetSize.padded,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(25),
+                                            ),
                                           ),
+                                          unselectedWidgetColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryText,
                                         ),
-                                        unselectedWidgetColor:
-                                            FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                      ),
-                                      child: CheckboxListTile(
-                                        value: _model.checkboxListTileValueMap1[
-                                            contactItem] ??= false,
-                                        onChanged: (newValue) async {
-                                          setState(() =>
+                                        child: CheckboxListTile(
+                                          value:
                                               _model.checkboxListTileValueMap1[
-                                                  contactItem] = newValue!);
-                                          if (newValue!) {
-                                            _model.upsertClientFromContactResult =
-                                                await actions
-                                                    .upsertClientFromContact(
-                                              contactItem,
-                                              currentUserUid,
-                                            );
-                                            if (!_model
-                                                .upsertClientFromContactResult!) {
-                                              await showDialog(
-                                                context: context,
-                                                builder: (alertDialogContext) {
-                                                  return AlertDialog(
-                                                    title: Text('Error'),
-                                                    content: Text(
-                                                        'The contact could not be imported'),
-                                                    actions: [
-                                                      TextButton(
-                                                        onPressed: () =>
-                                                            Navigator.pop(
-                                                                alertDialogContext),
-                                                        child: Text('Ok'),
-                                                      ),
-                                                    ],
-                                                  );
-                                                },
+                                                  contactItem] ??= false,
+                                          onChanged: (newValue) async {
+                                            setState(() => _model
+                                                    .checkboxListTileValueMap1[
+                                                contactItem] = newValue!);
+                                            if (newValue!) {
+                                              _model.upsertClientFromContactResult =
+                                                  await actions
+                                                      .upsertClientFromContact(
+                                                contactItem,
+                                                currentUserUid,
+                                              );
+                                              if (!_model
+                                                  .upsertClientFromContactResult!) {
+                                                await showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (alertDialogContext) {
+                                                    return AlertDialog(
+                                                      title: Text('Error'),
+                                                      content: Text(
+                                                          'The contact could not be imported'),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  alertDialogContext),
+                                                          child: Text('Ok'),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                );
+                                              }
+
+                                              setState(() {});
+                                            } else {
+                                              await actions
+                                                  .deleteClientFromContact(
+                                                contactItem,
+                                                currentUserUid,
                                               );
                                             }
-
-                                            setState(() {});
-                                          } else {
-                                            await actions
-                                                .deleteClientFromContact(
-                                              contactItem,
-                                              currentUserUid,
-                                            );
-                                          }
-                                        },
-                                        title: Text(
-                                          contactItem.fullName,
-                                          style: FlutterFlowTheme.of(context)
-                                              .titleLarge,
-                                        ),
-                                        tileColor: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        activeColor:
-                                            FlutterFlowTheme.of(context)
-                                                .secondary,
-                                        checkColor: FlutterFlowTheme.of(context)
-                                            .accent3,
-                                        dense: false,
-                                        controlAffinity:
-                                            ListTileControlAffinity.leading,
-                                        contentPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
-                                                5.0, 5.0, 5.0, 5.0),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
+                                          },
+                                          title: Text(
+                                            contactItem.fullName,
+                                            style: FlutterFlowTheme.of(context)
+                                                .titleLarge,
+                                          ),
+                                          tileColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryBackground,
+                                          activeColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondary,
+                                          checkColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .accent3,
+                                          dense: false,
+                                          controlAffinity:
+                                              ListTileControlAffinity.leading,
+                                          contentPadding: EdgeInsets.all(5.0),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  );
-                                },
-                              );
-                            },
+                                    );
+                                  },
+                                );
+                              },
+                            ),
                           ),
                         ),
                       if (_model.searchController.text != null &&
                           _model.searchController.text != '')
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 10.0, 0.0, 0.0),
-                          child: Builder(
-                            builder: (context) {
-                              final contact =
-                                  _model.simpleSearchResults.toList();
-                              return ListView.builder(
-                                padding: EdgeInsets.zero,
-                                shrinkWrap: true,
-                                scrollDirection: Axis.vertical,
-                                itemCount: contact.length,
-                                itemBuilder: (context, contactIndex) {
-                                  final contactItem = contact[contactIndex];
-                                  return Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        5.0, 5.0, 5.0, 5.0),
-                                    child: Theme(
-                                      data: ThemeData(
-                                        checkboxTheme: CheckboxThemeData(
-                                          visualDensity: VisualDensity.standard,
-                                          materialTapTargetSize:
-                                              MaterialTapTargetSize.padded,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(25),
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 10.0, 0.0, 0.0),
+                            child: Builder(
+                              builder: (context) {
+                                final contact =
+                                    _model.simpleSearchResults.toList();
+                                return ListView.builder(
+                                  padding: EdgeInsets.zero,
+                                  scrollDirection: Axis.vertical,
+                                  itemCount: contact.length,
+                                  itemBuilder: (context, contactIndex) {
+                                    final contactItem = contact[contactIndex];
+                                    return Padding(
+                                      padding: EdgeInsets.all(5.0),
+                                      child: Theme(
+                                        data: ThemeData(
+                                          checkboxTheme: CheckboxThemeData(
+                                            visualDensity:
+                                                VisualDensity.standard,
+                                            materialTapTargetSize:
+                                                MaterialTapTargetSize.padded,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(25),
+                                            ),
                                           ),
+                                          unselectedWidgetColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryText,
                                         ),
-                                        unselectedWidgetColor:
-                                            FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                      ),
-                                      child: CheckboxListTile(
-                                        value: _model.checkboxListTileValueMap2[
-                                            contactItem] ??= false,
-                                        onChanged: (newValue) async {
-                                          setState(() =>
+                                        child: CheckboxListTile(
+                                          value:
                                               _model.checkboxListTileValueMap2[
-                                                  contactItem] = newValue!);
-                                          if (newValue!) {
-                                            _model.upsertClientFromFilteredContactResult =
-                                                await actions
-                                                    .upsertClientFromContact(
-                                              _model.deviceContacts
-                                                  .where((e) =>
-                                                      contactItem == e.fullName)
-                                                  .toList()
-                                                  .first,
-                                              currentUserUid,
-                                            );
-                                            if (!_model
-                                                .upsertClientFromFilteredContactResult!) {
-                                              await showDialog(
-                                                context: context,
-                                                builder: (alertDialogContext) {
-                                                  return AlertDialog(
-                                                    title: Text('Error'),
-                                                    content: Text(
-                                                        'The contact could not be imported'),
-                                                    actions: [
-                                                      TextButton(
-                                                        onPressed: () =>
-                                                            Navigator.pop(
-                                                                alertDialogContext),
-                                                        child: Text('Ok'),
-                                                      ),
-                                                    ],
-                                                  );
-                                                },
+                                                  contactItem] ??= false,
+                                          onChanged: (newValue) async {
+                                            setState(() => _model
+                                                    .checkboxListTileValueMap2[
+                                                contactItem] = newValue!);
+                                            if (newValue!) {
+                                              _model.upsertClientFromFilteredContactResult =
+                                                  await actions
+                                                      .upsertClientFromContact(
+                                                _model.deviceContacts
+                                                    .where((e) =>
+                                                        contactItem ==
+                                                        e.fullName)
+                                                    .toList()
+                                                    .first,
+                                                currentUserUid,
+                                              );
+                                              if (!_model
+                                                  .upsertClientFromFilteredContactResult!) {
+                                                await showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (alertDialogContext) {
+                                                    return AlertDialog(
+                                                      title: Text('Error'),
+                                                      content: Text(
+                                                          'The contact could not be imported'),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  alertDialogContext),
+                                                          child: Text('Ok'),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                );
+                                              }
+
+                                              setState(() {});
+                                            } else {
+                                              await actions
+                                                  .deleteClientFromContact(
+                                                _model.deviceContacts
+                                                    .where((e) =>
+                                                        contactItem ==
+                                                        e.fullName)
+                                                    .toList()
+                                                    .first,
+                                                currentUserUid,
                                               );
                                             }
-
-                                            setState(() {});
-                                          } else {
-                                            await actions
-                                                .deleteClientFromContact(
-                                              _model.deviceContacts
-                                                  .where((e) =>
-                                                      contactItem == e.fullName)
-                                                  .toList()
-                                                  .first,
-                                              currentUserUid,
-                                            );
-                                          }
-                                        },
-                                        title: Text(
-                                          contactItem,
-                                          style: FlutterFlowTheme.of(context)
-                                              .titleLarge,
-                                        ),
-                                        tileColor: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        activeColor:
-                                            FlutterFlowTheme.of(context)
-                                                .secondary,
-                                        checkColor: FlutterFlowTheme.of(context)
-                                            .accent3,
-                                        dense: false,
-                                        controlAffinity:
-                                            ListTileControlAffinity.leading,
-                                        contentPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
-                                                5.0, 5.0, 5.0, 5.0),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
+                                          },
+                                          title: Text(
+                                            contactItem,
+                                            style: FlutterFlowTheme.of(context)
+                                                .titleLarge,
+                                          ),
+                                          tileColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryBackground,
+                                          activeColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondary,
+                                          checkColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .accent3,
+                                          dense: false,
+                                          controlAffinity:
+                                              ListTileControlAffinity.leading,
+                                          contentPadding: EdgeInsets.all(5.0),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  );
-                                },
-                              );
-                            },
+                                    );
+                                  },
+                                );
+                              },
+                            ),
                           ),
                         ),
                     ],

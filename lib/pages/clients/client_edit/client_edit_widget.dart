@@ -222,7 +222,7 @@ class _ClientEditWidgetState extends State<ClientEditWidget> {
             body: SafeArea(
               top: true,
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
+                padding: EdgeInsets.all(10.0),
                 child: Container(
                   width: double.infinity,
                   height: double.infinity,
@@ -231,8 +231,7 @@ class _ClientEditWidgetState extends State<ClientEditWidget> {
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 20.0),
+                    padding: EdgeInsets.all(20.0),
                     child: SingleChildScrollView(
                       child: Column(
                         mainAxisSize: MainAxisSize.max,

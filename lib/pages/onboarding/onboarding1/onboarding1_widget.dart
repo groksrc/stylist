@@ -413,7 +413,7 @@ class _Onboarding1WidgetState extends State<Onboarding1Widget>
             ),
             Expanded(
               child: Align(
-                alignment: AlignmentDirectional(0.00, 0.00),
+                alignment: AlignmentDirectional(0.0, 0.0),
                 child: Container(
                   width: double.infinity,
                   constraints: BoxConstraints(
@@ -571,7 +571,7 @@ class _Onboarding1WidgetState extends State<Onboarding1Widget>
                               ),
                             ),
                             Align(
-                              alignment: AlignmentDirectional(0.00, 1.00),
+                              alignment: AlignmentDirectional(0.0, 1.0),
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 10.0),

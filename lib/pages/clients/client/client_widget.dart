@@ -209,7 +209,7 @@ class _ClientWidgetState extends State<ClientWidget> {
             body: SafeArea(
               top: true,
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
+                padding: EdgeInsets.all(10.0),
                 child: Container(
                   width: double.infinity,
                   height: double.infinity,
