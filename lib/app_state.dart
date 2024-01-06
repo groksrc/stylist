@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
+import '/backend/schema/enums/enums.dart';
 import 'backend/supabase/supabase.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'flutter_flow/flutter_flow_util.dart';
@@ -53,16 +54,10 @@ class FFAppState extends ChangeNotifier {
     prefs.setBool('ff_contactsPermissionGranted', _value);
   }
 
-  DateTime? _dayViewSelectedDay;
-  DateTime? get dayViewSelectedDay => _dayViewSelectedDay;
-  set dayViewSelectedDay(DateTime? _value) {
-    _dayViewSelectedDay = _value;
-  }
-
-  DateTime? _dayViewTappedDate;
-  DateTime? get dayViewTappedDate => _dayViewTappedDate;
-  set dayViewTappedDate(DateTime? _value) {
-    _dayViewTappedDate = _value;
+  DateTime? _calendarSelectedDay;
+  DateTime? get calendarSelectedDay => _calendarSelectedDay;
+  set calendarSelectedDay(DateTime? _value) {
+    _calendarSelectedDay = _value;
   }
 }
 

@@ -112,6 +112,7 @@ class _AppointmentMonthWidgetState extends State<AppointmentMonthWidget> {
                   iconColor: FlutterFlowTheme.of(context).secondaryText,
                   weekFormat: false,
                   weekStartsMonday: false,
+                  initialDate: widget.selectedDay,
                   rowHeight: 64.0,
                   onChange: (DateTimeRange? newSelectedDate) {
                     setState(
@@ -138,11 +139,11 @@ class _AppointmentMonthWidgetState extends State<AppointmentMonthWidget> {
                       child: FFButtonWidget(
                         onPressed: () async {
                           setState(() {
-                            FFAppState().dayViewSelectedDay =
+                            FFAppState().calendarSelectedDay =
                                 _model.calendarSelectedDay?.start;
                           });
 
-                          context.pushNamed('appointmentDay');
+                          context.pushNamed('appointmentDayV2');
                         },
                         text: 'Open This Day',
                         options: FFButtonOptions(

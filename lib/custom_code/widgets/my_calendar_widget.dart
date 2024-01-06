@@ -1,6 +1,7 @@
 // Automatic FlutterFlow imports
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
+import '/backend/schema/enums/enums.dart';
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -62,9 +63,10 @@ class _MyCalendarWidgetState extends State<MyCalendarWidget> {
     }
   }
 
-  CalendarControllerProvider calendarControllerProvider() {
+  CalendarControllerProvider calendarControllerProvider(
+      List<CalendarEventData<Event>> events) {
     return CalendarControllerProvider(
-      controller: EventController()..addAll(_events),
+      controller: EventController()..addAll(events),
       child: dayViewBuilder(),
     );
   }
@@ -220,7 +222,8 @@ class _MyCalendarWidgetState extends State<MyCalendarWidget> {
         // Now you can use these events in your DayView
         // For example, you can pass them to a custom event builder function
 
-        return calendarControllerProvider(); // Replace with actual DayView widget
+        return calendarControllerProvider(
+            snapshot.data!); // Replace with actual DayView widget
       },
     );
   }

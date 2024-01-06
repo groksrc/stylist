@@ -7,25 +7,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'appointment_day_v2_model.dart';
-export 'appointment_day_v2_model.dart';
+import 'appointment_day_v2_copy_model.dart';
+export 'appointment_day_v2_copy_model.dart';
 
-class AppointmentDayV2Widget extends StatefulWidget {
-  const AppointmentDayV2Widget({Key? key}) : super(key: key);
+class AppointmentDayV2CopyWidget extends StatefulWidget {
+  const AppointmentDayV2CopyWidget({Key? key}) : super(key: key);
 
   @override
-  _AppointmentDayV2WidgetState createState() => _AppointmentDayV2WidgetState();
+  _AppointmentDayV2CopyWidgetState createState() =>
+      _AppointmentDayV2CopyWidgetState();
 }
 
-class _AppointmentDayV2WidgetState extends State<AppointmentDayV2Widget> {
-  late AppointmentDayV2Model _model;
+class _AppointmentDayV2CopyWidgetState
+    extends State<AppointmentDayV2CopyWidget> {
+  late AppointmentDayV2CopyModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => AppointmentDayV2Model());
+    _model = createModel(context, () => AppointmentDayV2CopyModel());
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }

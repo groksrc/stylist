@@ -143,7 +143,7 @@ class _AppointmentDayV1WidgetState extends State<AppointmentDayV1Widget> {
                           child: custom_widgets.DayViewWidget(
                             width: MediaQuery.sizeOf(context).width * 1.0,
                             height: MediaQuery.sizeOf(context).height * 1.0,
-                            selectedDay: FFAppState().dayViewSelectedDay,
+                            selectedDay: FFAppState().calendarSelectedDay,
                             onDateTap: () async {},
                             onPageChange: () async {},
                           ),

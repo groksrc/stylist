@@ -28,3 +28,5 @@ export '/pages/appointments/appointment_day_v1/appointment_day_v1_widget.dart'
     show AppointmentDayV1Widget;
 export '/pages/appointments/appointment_day_v2/appointment_day_v2_widget.dart'
     show AppointmentDayV2Widget;
+export '/pages/appointments/appointment_day_v2_copy/appointment_day_v2_copy_widget.dart'
+    show AppointmentDayV2CopyWidget;

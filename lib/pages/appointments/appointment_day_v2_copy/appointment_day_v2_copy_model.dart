@@ -3,13 +3,14 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
-import 'appointment_day_v2_widget.dart' show AppointmentDayV2Widget;
+import 'appointment_day_v2_copy_widget.dart' show AppointmentDayV2CopyWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class AppointmentDayV2Model extends FlutterFlowModel<AppointmentDayV2Widget> {
+class AppointmentDayV2CopyModel
+    extends FlutterFlowModel<AppointmentDayV2CopyWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

@@ -1,6 +1,7 @@
 // Automatic FlutterFlow imports
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
+import '/backend/schema/enums/enums.dart';
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -85,12 +86,12 @@ class _DayViewWrapperWidgetState extends State<DayViewWrapperWidget> {
             minuteSlotSize: MinuteSlotSize.minutes30,
             onDateTap: (date) {
               widget.onDateTap();
-              FFAppState().dayViewTappedDate = date;
+              //FFAppState().dayViewTappedDate = date;
               setState(() => _tappedDate = date);
             },
             onPageChange: (date, page) {
               widget.onPageChange();
-              FFAppState().dayViewSelectedDay = date;
+              //FFAppState().dayViewSelectedDay = date;
               setState(() => _selectedDay = date);
             },
             showHalfHours: true,

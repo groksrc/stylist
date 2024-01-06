@@ -12,8 +12,10 @@ import 'package:flutter/material.dart';
 // Begin custom widget code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-class DayViewHourWidget extends StatefulWidget {
-  const DayViewHourWidget({
+import 'package:calendar_view/calendar_view.dart';
+
+class CalendarDayView extends StatefulWidget {
+  const CalendarDayView({
     Key? key,
     this.width,
     this.height,
@@ -23,10 +25,10 @@ class DayViewHourWidget extends StatefulWidget {
   final double? height;
 
   @override
-  _DayViewHourWidgetState createState() => _DayViewHourWidgetState();
+  _CalendarDayViewState createState() => _CalendarDayViewState();
 }
 
-class _DayViewHourWidgetState extends State<DayViewHourWidget> {
+class _CalendarDayViewState extends State<CalendarDayView> {
   @override
   Widget build(BuildContext context) {
     return Container();
