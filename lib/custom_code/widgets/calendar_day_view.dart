@@ -22,7 +22,7 @@ class CalendarDayView extends StatefulWidget {
       this.height,
       super.key});
 
-  final List<AppointmentStruct> appointments;
+  final List<AppointmentsRow> appointments;
   final DateTime selectedDay;
   final double? height;
   final double? width;
@@ -33,7 +33,7 @@ class CalendarDayView extends StatefulWidget {
 
 class _CalendarDayViewState extends State<CalendarDayView> {
   EventController _eventController = EventController();
-  late List<AppointmentStruct> _appointments;
+  late List<AppointmentsRow> _appointments;
   late DateTime _selectedDay;
   late Duration _startDuration;
 
@@ -117,20 +117,21 @@ class _CalendarDayViewState extends State<CalendarDayView> {
     );
   }
 
-  // Future<List<CalendarEventData<AppointmentStruct>>> _fetchEvents() async {
+  // Future<List<CalendarEventData<AppointmentsRow>>> _fetchEvents() async {
   //   // Replace with your actual database fetching logic
   //   await Future.delayed(Duration(seconds: 1)); // Simulating network delay
   //   return []; // Return your list of events
   // }
 
-  List<CalendarEventData<AppointmentStruct>> _createEvents(
-      List<AppointmentStruct> appointments) {
-    List<CalendarEventData<AppointmentStruct>> events = [];
-    for (AppointmentStruct appointment in appointments) {
-      const CalendarEventData<AppointmentStruct> event = CalendarEventData(
+  List<CalendarEventData<AppointmentsRow>> _createEvents(
+      List<AppointmentsRow> appointments) {
+    List<CalendarEventData<AppointmentsRow>> events = [];
+    for (AppointmentsRow appointment in appointments) {
+      final event = CalendarEventData<AppointmentsRow>(
           title: appointment.title,
-          description: appointment.description,
-          color: appointment.color,
+          description:
+              appointment.description != null ? appointment.description! : "",
+          color: Color(appointment.color != null ? appointment.color! : 0),
           startTime: appointment.startTime,
           endTime: appointment.endTime,
           endDate: appointment.endDate,

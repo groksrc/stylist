@@ -145,6 +145,8 @@ class _AppointmentDayWidgetState extends State<AppointmentDayWidget> {
                               child: custom_widgets.CalendarDayView(
                                 width: double.infinity,
                                 height: double.infinity,
+                                appointments:
+                                    calendarDayViewAppointmentsRowList,
                                 selectedDay: widget.selectedDay!,
                               ),
                             );
