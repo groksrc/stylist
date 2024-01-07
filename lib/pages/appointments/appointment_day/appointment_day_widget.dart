@@ -1,3 +1,4 @@
+import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -11,7 +12,12 @@ import 'appointment_day_model.dart';
 export 'appointment_day_model.dart';
 
 class AppointmentDayWidget extends StatefulWidget {
-  const AppointmentDayWidget({Key? key}) : super(key: key);
+  const AppointmentDayWidget({
+    Key? key,
+    required this.selectedDay,
+  }) : super(key: key);
+
+  final DateTime? selectedDay;
 
   @override
   _AppointmentDayWidgetState createState() => _AppointmentDayWidgetState();
@@ -108,13 +114,41 @@ class _AppointmentDayWidgetState extends State<AppointmentDayWidget> {
                           color:
                               FlutterFlowTheme.of(context).secondaryBackground,
                         ),
-                        child: Container(
-                          width: double.infinity,
-                          height: double.infinity,
-                          child: custom_widgets.MainCalendar(
-                            width: double.infinity,
-                            height: double.infinity,
+                        child: FutureBuilder<List<AppointmentsRow>>(
+                          future: AppointmentsTable().queryRows(
+                            queryFn: (q) => q.eq(
+                              'date',
+                              supaSerialize<DateTime>(widget.selectedDay),
+                            ),
                           ),
+                          builder: (context, snapshot) {
+                            // Customize what your widget looks like when it's loading.
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: SizedBox(
+                                  width: 50.0,
+                                  height: 50.0,
+                                  child: CircularProgressIndicator(
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                      FlutterFlowTheme.of(context).primary,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }
+                            List<AppointmentsRow>
+                                calendarDayViewAppointmentsRowList =
+                                snapshot.data!;
+                            return Container(
+                              width: double.infinity,
+                              height: double.infinity,
+                              child: custom_widgets.CalendarDayView(
+                                width: double.infinity,
+                                height: double.infinity,
+                                selectedDay: widget.selectedDay!,
+                              ),
+                            );
+                          },
                         ),
                       ),
                     ),

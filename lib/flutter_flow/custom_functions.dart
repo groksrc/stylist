@@ -38,3 +38,41 @@ DateTime today() {
   final now = DateTime.now();
   return new DateTime(now.year, now.month, now.day);
 }
+
+List<CalendarDayStruct> getWeekDays(DateTime date) {
+  // Find out the weekday number (where Monday is 1 and Sunday is 7)
+  int weekday = date.weekday;
+
+  // Calculate the difference in days from the previous Sunday
+  int daysToPreviousSunday = weekday % 7;
+
+  // Get the previous Sunday's date
+  DateTime sunday = date.subtract(Duration(days: daysToPreviousSunday));
+
+  // Create an array to store the week's dates
+  List<CalendarDayStruct> weekDates = [];
+
+  // see if today is the selected day
+  DateTime now = DateTime.now();
+  bool todayIsSelected =
+      now.year == date.year && now.month == date.month && now.day == date.day;
+
+  // Add each day of the week to the array
+  for (int i = 0; i < 7; i++) {
+    DateTime day = sunday.add(Duration(days: i));
+    weekDates.add(CalendarDayStruct(
+      color: todayIsSelected &&
+              day.year == date.year &&
+              day.month == date.month &&
+              day.day == date.day
+          ? Colors.red
+          : Colors.black,
+      number: day.day,
+      isSelected: day.year == date.year &&
+          day.month == date.month &&
+          day.day == date.day,
+    ));
+  }
+
+  return weekDates;
+}

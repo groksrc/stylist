@@ -15,22 +15,262 @@ import 'package:flutter/material.dart';
 import 'package:calendar_view/calendar_view.dart';
 
 class CalendarDayView extends StatefulWidget {
-  const CalendarDayView({
-    Key? key,
-    this.width,
-    this.height,
-  }) : super(key: key);
+  const CalendarDayView(
+      {required this.appointments,
+      required this.selectedDay,
+      this.width,
+      this.height,
+      super.key});
 
-  final double? width;
+  final List<AppointmentStruct> appointments;
+  final DateTime selectedDay;
   final double? height;
+  final double? width;
 
   @override
   _CalendarDayViewState createState() => _CalendarDayViewState();
 }
 
 class _CalendarDayViewState extends State<CalendarDayView> {
+  EventController _eventController = EventController();
+  late List<AppointmentStruct> _appointments;
+  late DateTime _selectedDay;
+  late Duration _startDuration;
+
+  StringProvider dateStringBuilder() {
+    const format = 'MM/dd/yyyy';
+    return (DateTime date, {DateTime? secondaryDate}) {
+      return DateFormat(format).format(date);
+    };
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedDay = widget.selectedDay;
+    _appointments = widget.appointments;
+
+    // Calculate the start duration
+    DateTime now = DateTime.now();
+    if (now.hour >= 14) {
+      // Check if the current hour is 14 (2 PM) or later
+      _startDuration = const Duration(hours: 14); // Set to 2 PM
+    } else {
+      _startDuration = const Duration(hours: 9); // Default start time
+    }
+  }
+
+  DayView dayViewBuilder() {
+    return DayView(
+      dateStringBuilder: dateStringBuilder(),
+      dayTitleBuilder: (date) => const SizedBox.shrink(),
+      halfHourIndicatorSettings: HourIndicatorSettings(
+        color: Theme.of(context).dividerColor,
+        lineStyle: LineStyle.dashed,
+      ),
+      headerStyle: HeaderStyle(
+        decoration: const BoxDecoration(
+          color: Colors.white,
+        ),
+        headerTextStyle: Theme.of(context).textTheme.titleMedium,
+      ),
+      heightPerMinute: 1.3,
+      initialDay: _selectedDay,
+      minuteSlotSize: MinuteSlotSize.minutes30,
+      onDateTap: (date) {
+        setState(() => _selectedDay = date);
+      },
+      onEventTap: (events, date) {
+        // show an alert dialog with the event title
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text(events.first.title),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text('OK'),
+              ),
+            ],
+          ),
+        );
+      },
+      onPageChange: (date, page) {
+        setState(() => _selectedDay = date);
+      },
+      showHalfHours: true,
+      startDuration: _startDuration,
+      timeLineBuilder: (date) {
+        if (date.minute != 0) {
+          // Return an empty widget if the time is not at the top of the hour
+          return const SizedBox.shrink();
+        }
+
+        return Padding(
+            padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
+            child: Text(DateFormat('h a').format(date),
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium
+                    ?.copyWith(fontSize: 12)));
+      },
+    );
+  }
+
+  // Future<List<CalendarEventData<AppointmentStruct>>> _fetchEvents() async {
+  //   // Replace with your actual database fetching logic
+  //   await Future.delayed(Duration(seconds: 1)); // Simulating network delay
+  //   return []; // Return your list of events
+  // }
+
+  List<CalendarEventData<AppointmentStruct>> _createEvents(
+      List<AppointmentStruct> appointments) {
+    List<CalendarEventData<AppointmentStruct>> events = [];
+    for (AppointmentStruct appointment in appointments) {
+      const CalendarEventData<AppointmentStruct> event = CalendarEventData(
+          title: appointment.title,
+          description: appointment.description,
+          color: appointment.color,
+          startTime: appointment.startTime,
+          endTime: appointment.endTime,
+          endDate: appointment.endDate,
+          date: appointment.date,
+          event: appointment);
+
+      events.add(event);
+    }
+    return events;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    _eventController.addAll(_createEvents(_appointments));
+    return Column(children: [
+      const DaysOfWeek(),
+      const SizedBox(height: 8),
+      Dismissible(
+        key: ObjectKey(_selectedDay),
+        child: CalendarDays(
+          days: getWeekDays(_selectedDay),
+        ),
+        onDismissed: (direction) {
+          setState(() {
+            _selectedDay = _selectedDay.add(
+              direction == DismissDirection.endToStart
+                  ? Duration(days: 7)
+                  : Duration(days: -7),
+            );
+          });
+        },
+      ),
+      // Expanded(child: calendarControllerProvider(snapshot.data!))
+      Expanded(
+          child: CalendarControllerProvider(
+        controller: _eventController,
+        child: dayViewBuilder(),
+      ))
+    ]);
+  }
+}
+
+class DaysOfWeek extends StatelessWidget {
+  const DaysOfWeek({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: Center(
+            child: Text(
+              'S',
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    color: const Color.fromARGB(255, 150, 150, 150),
+                  ),
+            ),
+          ),
+        ),
+        const Expanded(
+          child: Center(
+            child: Text(
+              'M',
+            ),
+          ),
+        ),
+        const Expanded(
+          child: Center(
+            child: Text(
+              'T',
+            ),
+          ),
+        ),
+        const Expanded(
+          child: Center(
+            child: Text(
+              'W',
+            ),
+          ),
+        ),
+        const Expanded(
+          child: Center(
+            child: Text(
+              'T',
+            ),
+          ),
+        ),
+        const Expanded(
+          child: Center(
+            child: Text(
+              'F',
+            ),
+          ),
+        ),
+        Expanded(
+          child: Center(
+            child: Text('S',
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      color: const Color.fromARGB(255, 150, 150, 150),
+                    )),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class CalendarDays extends StatelessWidget {
+  const CalendarDays({super.key, required this.days});
+
+  final List<CalendarDayStruct> days;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        for (final day in days)
+          Expanded(
+            child: Center(
+              child: Container(
+                width: 30,
+                height: 30,
+                decoration: day.isSelected
+                    ? BoxDecoration(
+                        color: day.color,
+                        borderRadius: BorderRadius.circular(15),
+                      )
+                    : null,
+                child: Center(
+                  child: Text(
+                    day.number.toString(),
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          color: day.isSelected ? Colors.white : day.color,
+                        ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+      ],
+    );
   }
 }

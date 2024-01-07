@@ -9,8 +9,8 @@ import '/backend/schema/enums/enums.dart';
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
-class EventStruct extends FFFirebaseStruct {
-  EventStruct({
+class AppointmentStruct extends FFFirebaseStruct {
+  AppointmentStruct({
     String? eventId,
     String? title,
     String? description,
@@ -78,7 +78,8 @@ class EventStruct extends FFFirebaseStruct {
   set endTime(DateTime? val) => _endTime = val;
   bool hasEndTime() => _endTime != null;
 
-  static EventStruct fromMap(Map<String, dynamic> data) => EventStruct(
+  static AppointmentStruct fromMap(Map<String, dynamic> data) =>
+      AppointmentStruct(
         eventId: data['eventId'] as String?,
         title: data['title'] as String?,
         description: data['description'] as String?,
@@ -89,8 +90,9 @@ class EventStruct extends FFFirebaseStruct {
         endTime: data['endTime'] as DateTime?,
       );
 
-  static EventStruct? maybeFromMap(dynamic data) =>
-      data is Map ? EventStruct.fromMap(data.cast<String, dynamic>()) : null;
+  static AppointmentStruct? maybeFromMap(dynamic data) => data is Map
+      ? AppointmentStruct.fromMap(data.cast<String, dynamic>())
+      : null;
 
   Map<String, dynamic> toMap() => {
         'eventId': _eventId,
@@ -139,8 +141,8 @@ class EventStruct extends FFFirebaseStruct {
         ),
       }.withoutNulls;
 
-  static EventStruct fromSerializableMap(Map<String, dynamic> data) =>
-      EventStruct(
+  static AppointmentStruct fromSerializableMap(Map<String, dynamic> data) =>
+      AppointmentStruct(
         eventId: deserializeParam(
           data['eventId'],
           ParamType.String,
@@ -184,11 +186,11 @@ class EventStruct extends FFFirebaseStruct {
       );
 
   @override
-  String toString() => 'EventStruct(${toMap()})';
+  String toString() => 'AppointmentStruct(${toMap()})';
 
   @override
   bool operator ==(Object other) {
-    return other is EventStruct &&
+    return other is AppointmentStruct &&
         eventId == other.eventId &&
         title == other.title &&
         description == other.description &&
@@ -204,7 +206,7 @@ class EventStruct extends FFFirebaseStruct {
       [eventId, title, description, date, startTime, color, endDate, endTime]);
 }
 
-EventStruct createEventStruct({
+AppointmentStruct createAppointmentStruct({
   String? eventId,
   String? title,
   String? description,
@@ -218,7 +220,7 @@ EventStruct createEventStruct({
   bool create = false,
   bool delete = false,
 }) =>
-    EventStruct(
+    AppointmentStruct(
       eventId: eventId,
       title: title,
       description: description,
@@ -235,60 +237,64 @@ EventStruct createEventStruct({
       ),
     );
 
-EventStruct? updateEventStruct(
-  EventStruct? event, {
+AppointmentStruct? updateAppointmentStruct(
+  AppointmentStruct? appointment, {
   bool clearUnsetFields = true,
   bool create = false,
 }) =>
-    event
+    appointment
       ?..firestoreUtilData = FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,
       );
 
-void addEventStructData(
+void addAppointmentStructData(
   Map<String, dynamic> firestoreData,
-  EventStruct? event,
+  AppointmentStruct? appointment,
   String fieldName, [
   bool forFieldValue = false,
 ]) {
   firestoreData.remove(fieldName);
-  if (event == null) {
+  if (appointment == null) {
     return;
   }
-  if (event.firestoreUtilData.delete) {
+  if (appointment.firestoreUtilData.delete) {
     firestoreData[fieldName] = FieldValue.delete();
     return;
   }
   final clearFields =
-      !forFieldValue && event.firestoreUtilData.clearUnsetFields;
+      !forFieldValue && appointment.firestoreUtilData.clearUnsetFields;
   if (clearFields) {
     firestoreData[fieldName] = <String, dynamic>{};
   }
-  final eventData = getEventFirestoreData(event, forFieldValue);
-  final nestedData = eventData.map((k, v) => MapEntry('$fieldName.$k', v));
+  final appointmentData =
+      getAppointmentFirestoreData(appointment, forFieldValue);
+  final nestedData =
+      appointmentData.map((k, v) => MapEntry('$fieldName.$k', v));
 
-  final mergeFields = event.firestoreUtilData.create || clearFields;
+  final mergeFields = appointment.firestoreUtilData.create || clearFields;
   firestoreData
       .addAll(mergeFields ? mergeNestedFields(nestedData) : nestedData);
 }
 
-Map<String, dynamic> getEventFirestoreData(
-  EventStruct? event, [
+Map<String, dynamic> getAppointmentFirestoreData(
+  AppointmentStruct? appointment, [
   bool forFieldValue = false,
 ]) {
-  if (event == null) {
+  if (appointment == null) {
     return {};
   }
-  final firestoreData = mapToFirestore(event.toMap());
+  final firestoreData = mapToFirestore(appointment.toMap());
 
   // Add any Firestore field values
-  event.firestoreUtilData.fieldValues.forEach((k, v) => firestoreData[k] = v);
+  appointment.firestoreUtilData.fieldValues
+      .forEach((k, v) => firestoreData[k] = v);
 
   return forFieldValue ? mergeNestedFields(firestoreData) : firestoreData;
 }
 
-List<Map<String, dynamic>> getEventListFirestoreData(
-  List<EventStruct>? events,
+List<Map<String, dynamic>> getAppointmentListFirestoreData(
+  List<AppointmentStruct>? appointments,
 ) =>
-    events?.map((e) => getEventFirestoreData(e, true)).toList() ?? [];
+    appointments?.map((e) => getAppointmentFirestoreData(e, true)).toList() ??
+    [];

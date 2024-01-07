@@ -143,7 +143,15 @@ class _AppointmentMonthWidgetState extends State<AppointmentMonthWidget> {
                                 _model.calendarSelectedDay?.start;
                           });
 
-                          context.pushNamed('appointmentDayV2');
+                          context.pushNamed(
+                            'appointmentDay',
+                            queryParameters: {
+                              'selectedDay': serializeParam(
+                                FFAppState().calendarSelectedDay,
+                                ParamType.DateTime,
+                              ),
+                            }.withoutNulls,
+                          );
                         },
                         text: 'Open This Day',
                         options: FFButtonOptions(

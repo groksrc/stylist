@@ -6,4 +6,5 @@ export 'row.dart';
 export 'table.dart';
 
 export 'tables/stylists.dart';
+export 'tables/appointments.dart';
 export 'tables/clients.dart';
