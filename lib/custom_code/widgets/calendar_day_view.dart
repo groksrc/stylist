@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
 import 'package:calendar_view/calendar_view.dart';
+import 'package:provider/provider.dart';
 
 class CalendarDayView extends StatefulWidget {
   const CalendarDayView(
@@ -32,7 +33,7 @@ class CalendarDayView extends StatefulWidget {
 }
 
 class _CalendarDayViewState extends State<CalendarDayView> {
-  EventController _eventController = EventController();
+  final EventController _eventController = EventController();
   late List<AppointmentsRow> _appointments;
   late DateTime _selectedDay;
   late Duration _startDuration;
@@ -117,12 +118,6 @@ class _CalendarDayViewState extends State<CalendarDayView> {
     );
   }
 
-  // Future<List<CalendarEventData<AppointmentsRow>>> _fetchEvents() async {
-  //   // Replace with your actual database fetching logic
-  //   await Future.delayed(Duration(seconds: 1)); // Simulating network delay
-  //   return []; // Return your list of events
-  // }
-
   List<CalendarEventData<AppointmentsRow>> _createEvents(
       List<AppointmentsRow> appointments) {
     List<CalendarEventData<AppointmentsRow>> events = [];
@@ -131,7 +126,7 @@ class _CalendarDayViewState extends State<CalendarDayView> {
           title: appointment.title,
           description:
               appointment.description != null ? appointment.description! : "",
-          color: Color(appointment.color != null ? appointment.color! : 0),
+          // color: Color(appointment.color != null ? appointment.color! : 0),
           startTime: appointment.startTime,
           endTime: appointment.endTime,
           endDate: appointment.endDate,
@@ -145,10 +140,9 @@ class _CalendarDayViewState extends State<CalendarDayView> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
     _eventController.addAll(_createEvents(_appointments));
     return Column(children: [
-      const DaysOfWeek(),
-      const SizedBox(height: 8),
       Dismissible(
         key: ObjectKey(_selectedDay),
         child: CalendarDays(
@@ -171,71 +165,6 @@ class _CalendarDayViewState extends State<CalendarDayView> {
         child: dayViewBuilder(),
       ))
     ]);
-  }
-}
-
-class DaysOfWeek extends StatelessWidget {
-  const DaysOfWeek({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: Center(
-            child: Text(
-              'S',
-              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                    color: const Color.fromARGB(255, 150, 150, 150),
-                  ),
-            ),
-          ),
-        ),
-        const Expanded(
-          child: Center(
-            child: Text(
-              'M',
-            ),
-          ),
-        ),
-        const Expanded(
-          child: Center(
-            child: Text(
-              'T',
-            ),
-          ),
-        ),
-        const Expanded(
-          child: Center(
-            child: Text(
-              'W',
-            ),
-          ),
-        ),
-        const Expanded(
-          child: Center(
-            child: Text(
-              'T',
-            ),
-          ),
-        ),
-        const Expanded(
-          child: Center(
-            child: Text(
-              'F',
-            ),
-          ),
-        ),
-        Expanded(
-          child: Center(
-            child: Text('S',
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: const Color.fromARGB(255, 150, 150, 150),
-                    )),
-          ),
-        ),
-      ],
-    );
   }
 }
 

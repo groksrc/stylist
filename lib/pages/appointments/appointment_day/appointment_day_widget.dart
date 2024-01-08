@@ -12,12 +12,7 @@ import 'appointment_day_model.dart';
 export 'appointment_day_model.dart';
 
 class AppointmentDayWidget extends StatefulWidget {
-  const AppointmentDayWidget({
-    Key? key,
-    required this.selectedDay,
-  }) : super(key: key);
-
-  final DateTime? selectedDay;
+  const AppointmentDayWidget({Key? key}) : super(key: key);
 
   @override
   _AppointmentDayWidgetState createState() => _AppointmentDayWidgetState();
@@ -103,55 +98,71 @@ class _AppointmentDayWidgetState extends State<AppointmentDayWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Expanded(
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Expanded(
-                      child: Container(
+                child: Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).primaryBackground,
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Container(
                         width: double.infinity,
-                        height: double.infinity,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                        ),
-                        child: FutureBuilder<List<AppointmentsRow>>(
-                          future: AppointmentsTable().queryRows(
-                            queryFn: (q) => q,
-                          ),
-                          builder: (context, snapshot) {
-                            // Customize what your widget looks like when it's loading.
-                            if (!snapshot.hasData) {
-                              return Center(
-                                child: SizedBox(
-                                  width: 50.0,
-                                  height: 50.0,
-                                  child: CircularProgressIndicator(
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                      FlutterFlowTheme.of(context).primary,
-                                    ),
-                                  ),
-                                ),
-                              );
-                            }
-                            List<AppointmentsRow>
-                                calendarDayViewAppointmentsRowList =
-                                snapshot.data!;
-                            return Container(
-                              width: double.infinity,
-                              height: double.infinity,
-                              child: custom_widgets.CalendarDayView(
-                                width: double.infinity,
-                                height: double.infinity,
-                                appointments:
-                                    calendarDayViewAppointmentsRowList,
-                                selectedDay: widget.selectedDay!,
-                              ),
-                            );
-                          },
+                        height: 30.0,
+                        child: custom_widgets.DaysOfWeek(
+                          width: double.infinity,
+                          height: 30.0,
                         ),
                       ),
-                    ),
-                  ],
+                      Expanded(
+                        child: Container(
+                          width: double.infinity,
+                          height: double.infinity,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                          ),
+                          child: FutureBuilder<List<AppointmentsRow>>(
+                            future: AppointmentsTable().queryRows(
+                              queryFn: (q) => q,
+                            ),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: SizedBox(
+                                    width: 50.0,
+                                    height: 50.0,
+                                    child: CircularProgressIndicator(
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                        FlutterFlowTheme.of(context).primary,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }
+                              List<AppointmentsRow>
+                                  calendarDayViewAppointmentsRowList =
+                                  snapshot.data!;
+                              return Container(
+                                width: double.infinity,
+                                height: double.infinity,
+                                child: custom_widgets.CalendarDayView(
+                                  width: double.infinity,
+                                  height: double.infinity,
+                                  appointments:
+                                      calendarDayViewAppointmentsRowList,
+                                  selectedDay:
+                                      FFAppState().calendarSelectedDay!,
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Row(

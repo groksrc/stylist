@@ -182,9 +182,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'appointmentDay',
               path: 'appointmentDay',
               requireAuth: true,
-              builder: (context, params) => AppointmentDayWidget(
-                selectedDay: params.getParam('selectedDay', ParamType.DateTime),
-              ),
+              builder: (context, params) => AppointmentDayWidget(),
             ),
             FFRoute(
               name: 'appointmentDayV1',
