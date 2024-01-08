@@ -77,3 +77,7 @@ List<CalendarDayStruct> getWeekDays(DateTime date) {
 
   return weekDates;
 }
+
+DateTime dateWithoutTime(DateTime date) {
+  return DateTime(date.year, date.month, date.day);
+}
