@@ -21,11 +21,13 @@ class CalendarDayView extends StatefulWidget {
   const CalendarDayView(
       {required this.appointments,
       required this.selectedDay,
+      this.onSelectedDayChanged,
       this.width,
       this.height,
       super.key});
 
   final List<AppointmentsRow> appointments;
+  final Future<dynamic> Function()? onSelectedDayChanged;
   final DateTime selectedDay;
   final double? height;
   final double? width;
@@ -101,6 +103,9 @@ class _CalendarDayViewState extends State<CalendarDayView> {
       onPageChange: (date, page) {
         setState(() => FFAppState().update(() {
               FFAppState().calendarSelectedDay = date;
+              if (widget.onSelectedDayChanged != null) {
+                widget.onSelectedDayChanged!();
+              }
             }));
       },
       showHalfHours: true,
@@ -151,6 +156,7 @@ class _CalendarDayViewState extends State<CalendarDayView> {
         key: ValueKey(widget.selectedDay),
         child: CalendarDays(
           days: getWeekDays(widget.selectedDay),
+          onSelectedDayChanged: widget.onSelectedDayChanged,
         ),
         onDismissed: (direction) {
           setState(() {
@@ -161,6 +167,9 @@ class _CalendarDayViewState extends State<CalendarDayView> {
                       ? const Duration(days: 7)
                       : const Duration(days: -7));
             });
+            if (widget.onSelectedDayChanged != null) {
+              widget.onSelectedDayChanged!();
+            }
           });
         },
       ),
@@ -174,9 +183,11 @@ class _CalendarDayViewState extends State<CalendarDayView> {
 }
 
 class CalendarDays extends StatelessWidget {
-  const CalendarDays({super.key, required this.days});
+  const CalendarDays(
+      {super.key, required this.days, this.onSelectedDayChanged});
 
   final List<CalendarDayStruct> days;
+  final Future<dynamic> Function()? onSelectedDayChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -201,6 +212,9 @@ class CalendarDays extends StatelessWidget {
                       FFAppState().update(() {
                         FFAppState().calendarSelectedDay = day.date;
                       });
+                      if (this.onSelectedDayChanged != null) {
+                        this.onSelectedDayChanged!();
+                      }
                     },
                     child: Text(
                       day.number.toString(),

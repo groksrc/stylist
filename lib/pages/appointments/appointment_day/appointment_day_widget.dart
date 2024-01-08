@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -125,14 +126,17 @@ class _AppointmentDayWidgetState extends State<AppointmentDayWidget> {
                                 .secondaryBackground,
                           ),
                           child: FutureBuilder<List<AppointmentsRow>>(
-                            future: AppointmentsTable().queryRows(
-                              queryFn: (q) => q.eq(
-                                'date',
-                                supaSerialize<DateTime>(
-                                    functions.dateWithoutTime(
-                                        FFAppState().calendarSelectedDay!)),
-                              ),
-                            ),
+                            future: (_model.requestCompleter ??=
+                                    Completer<List<AppointmentsRow>>()
+                                      ..complete(AppointmentsTable().queryRows(
+                                        queryFn: (q) => q.eq(
+                                          'date',
+                                          supaSerialize<DateTime>(functions
+                                              .dateWithoutTime(FFAppState()
+                                                  .calendarSelectedDay!)),
+                                        ),
+                                      )))
+                                .future,
                             builder: (context, snapshot) {
                               // Customize what your widget looks like when it's loading.
                               if (!snapshot.hasData) {
@@ -161,6 +165,11 @@ class _AppointmentDayWidgetState extends State<AppointmentDayWidget> {
                                       calendarDayViewAppointmentsRowList,
                                   selectedDay:
                                       FFAppState().calendarSelectedDay!,
+                                  onSelectedDayChanged: () async {
+                                    setState(
+                                        () => _model.requestCompleter = null);
+                                    await _model.waitForRequestCompleted();
+                                  },
                                 ),
                               );
                             },
