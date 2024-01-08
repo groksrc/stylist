@@ -12,12 +12,14 @@ import '/flutter_flow/flutter_flow_util.dart';
 class CalendarDayStruct extends FFFirebaseStruct {
   CalendarDayStruct({
     Color? color,
-    int? number,
+    DateTime? date,
     bool? isSelected,
+    int? number,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _color = color,
-        _number = number,
+        _date = date,
         _isSelected = isSelected,
+        _number = number,
         super(firestoreUtilData);
 
   // "color" field.
@@ -26,12 +28,11 @@ class CalendarDayStruct extends FFFirebaseStruct {
   set color(Color? val) => _color = val;
   bool hasColor() => _color != null;
 
-  // "number" field.
-  int? _number;
-  int get number => _number ?? 0;
-  set number(int? val) => _number = val;
-  void incrementNumber(int amount) => _number = number + amount;
-  bool hasNumber() => _number != null;
+  // "date" field.
+  DateTime? _date;
+  DateTime? get date => _date;
+  set date(DateTime? val) => _date = val;
+  bool hasDate() => _date != null;
 
   // "isSelected" field.
   bool? _isSelected;
@@ -39,11 +40,19 @@ class CalendarDayStruct extends FFFirebaseStruct {
   set isSelected(bool? val) => _isSelected = val;
   bool hasIsSelected() => _isSelected != null;
 
+  // "number" field.
+  int? _number;
+  int get number => _number ?? 0;
+  set number(int? val) => _number = val;
+  void incrementNumber(int amount) => _number = number + amount;
+  bool hasNumber() => _number != null;
+
   static CalendarDayStruct fromMap(Map<String, dynamic> data) =>
       CalendarDayStruct(
         color: getSchemaColor(data['color']),
-        number: castToType<int>(data['number']),
+        date: data['date'] as DateTime?,
         isSelected: data['isSelected'] as bool?,
+        number: castToType<int>(data['number']),
       );
 
   static CalendarDayStruct? maybeFromMap(dynamic data) => data is Map
@@ -52,8 +61,9 @@ class CalendarDayStruct extends FFFirebaseStruct {
 
   Map<String, dynamic> toMap() => {
         'color': _color,
-        'number': _number,
+        'date': _date,
         'isSelected': _isSelected,
+        'number': _number,
       }.withoutNulls;
 
   @override
@@ -62,13 +72,17 @@ class CalendarDayStruct extends FFFirebaseStruct {
           _color,
           ParamType.Color,
         ),
-        'number': serializeParam(
-          _number,
-          ParamType.int,
+        'date': serializeParam(
+          _date,
+          ParamType.DateTime,
         ),
         'isSelected': serializeParam(
           _isSelected,
           ParamType.bool,
+        ),
+        'number': serializeParam(
+          _number,
+          ParamType.int,
         ),
       }.withoutNulls;
 
@@ -79,14 +93,19 @@ class CalendarDayStruct extends FFFirebaseStruct {
           ParamType.Color,
           false,
         ),
-        number: deserializeParam(
-          data['number'],
-          ParamType.int,
+        date: deserializeParam(
+          data['date'],
+          ParamType.DateTime,
           false,
         ),
         isSelected: deserializeParam(
           data['isSelected'],
           ParamType.bool,
+          false,
+        ),
+        number: deserializeParam(
+          data['number'],
+          ParamType.int,
           false,
         ),
       );
@@ -98,18 +117,21 @@ class CalendarDayStruct extends FFFirebaseStruct {
   bool operator ==(Object other) {
     return other is CalendarDayStruct &&
         color == other.color &&
-        number == other.number &&
-        isSelected == other.isSelected;
+        date == other.date &&
+        isSelected == other.isSelected &&
+        number == other.number;
   }
 
   @override
-  int get hashCode => const ListEquality().hash([color, number, isSelected]);
+  int get hashCode =>
+      const ListEquality().hash([color, date, isSelected, number]);
 }
 
 CalendarDayStruct createCalendarDayStruct({
   Color? color,
-  int? number,
+  DateTime? date,
   bool? isSelected,
+  int? number,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -117,8 +139,9 @@ CalendarDayStruct createCalendarDayStruct({
 }) =>
     CalendarDayStruct(
       color: color,
-      number: number,
+      date: date,
       isSelected: isSelected,
+      number: number,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,
