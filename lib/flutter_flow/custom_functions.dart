@@ -67,10 +67,11 @@ List<CalendarDayStruct> getWeekDays(DateTime date) {
               day.day == date.day
           ? Colors.red
           : Colors.black,
-      number: day.day,
+      date: day,
       isSelected: day.year == date.year &&
           day.month == date.month &&
           day.day == date.day,
+      number: day.day,
     ));
   }
 

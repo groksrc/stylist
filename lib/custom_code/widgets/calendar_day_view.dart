@@ -12,6 +12,8 @@ import 'package:flutter/material.dart';
 // Begin custom widget code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
+import 'index.dart'; // Imports other custom widgets
+
 import 'package:calendar_view/calendar_view.dart';
 import 'package:provider/provider.dart';
 
@@ -35,7 +37,6 @@ class CalendarDayView extends StatefulWidget {
 class _CalendarDayViewState extends State<CalendarDayView> {
   final EventController _eventController = EventController();
   late List<AppointmentsRow> _appointments;
-  late DateTime _selectedDay;
   late Duration _startDuration;
 
   StringProvider dateStringBuilder() {
@@ -48,7 +49,6 @@ class _CalendarDayViewState extends State<CalendarDayView> {
   @override
   void initState() {
     super.initState();
-    _selectedDay = widget.selectedDay;
     _appointments = widget.appointments;
 
     // Calculate the start duration
@@ -76,10 +76,12 @@ class _CalendarDayViewState extends State<CalendarDayView> {
         headerTextStyle: Theme.of(context).textTheme.titleMedium,
       ),
       heightPerMinute: 1.3,
-      initialDay: _selectedDay,
+      initialDay: widget.selectedDay,
       minuteSlotSize: MinuteSlotSize.minutes30,
       onDateTap: (date) {
-        setState(() => _selectedDay = date);
+        setState(() => FFAppState().update(() {
+              FFAppState().calendarSelectedDay = date;
+            }));
       },
       onEventTap: (events, date) {
         // show an alert dialog with the event title
@@ -97,7 +99,9 @@ class _CalendarDayViewState extends State<CalendarDayView> {
         );
       },
       onPageChange: (date, page) {
-        setState(() => _selectedDay = date);
+        setState(() => FFAppState().update(() {
+              FFAppState().calendarSelectedDay = date;
+            }));
       },
       showHalfHours: true,
       startDuration: _startDuration,
@@ -144,21 +148,22 @@ class _CalendarDayViewState extends State<CalendarDayView> {
     _eventController.addAll(_createEvents(_appointments));
     return Column(children: [
       Dismissible(
-        key: ObjectKey(_selectedDay),
+        key: ValueKey(widget.selectedDay),
         child: CalendarDays(
-          days: getWeekDays(_selectedDay),
+          days: getWeekDays(widget.selectedDay),
         ),
         onDismissed: (direction) {
           setState(() {
-            _selectedDay = _selectedDay.add(
-              direction == DismissDirection.endToStart
-                  ? Duration(days: 7)
-                  : Duration(days: -7),
-            );
+            FFAppState().update(() {
+              FFAppState().calendarSelectedDay = FFAppState()
+                  .calendarSelectedDay!
+                  .add(direction == DismissDirection.endToStart
+                      ? const Duration(days: 7)
+                      : const Duration(days: -7));
+            });
           });
         },
       ),
-      // Expanded(child: calendarControllerProvider(snapshot.data!))
       Expanded(
           child: CalendarControllerProvider(
         controller: _eventController,
@@ -181,20 +186,28 @@ class CalendarDays extends StatelessWidget {
           Expanded(
             child: Center(
               child: Container(
-                width: 30,
-                height: 30,
+                width: 35,
+                height: 35,
                 decoration: day.isSelected
                     ? BoxDecoration(
                         color: day.color,
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(30),
                       )
                     : null,
                 child: Center(
-                  child: Text(
-                    day.number.toString(),
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          color: day.isSelected ? Colors.white : day.color,
-                        ),
+                  child: TextButton(
+                    onPressed: () {
+                      // FFAppState().calendarSelectedDay = day.date;
+                      FFAppState().update(() {
+                        FFAppState().calendarSelectedDay = day.date;
+                      });
+                    },
+                    child: Text(
+                      day.number.toString(),
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            color: day.isSelected ? Colors.white : day.color,
+                          ),
+                    ),
                   ),
                 ),
               ),
